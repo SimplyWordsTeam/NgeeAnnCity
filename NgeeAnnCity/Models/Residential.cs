@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace NgeeAnnCity.Models
 {
-	internal class Tower
+	internal class Residential
 	{
-		
 	}
 }
