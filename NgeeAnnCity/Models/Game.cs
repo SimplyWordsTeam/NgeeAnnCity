@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,7 +12,7 @@ namespace NgeeAnnCity.Models
 		public int Id { get; set; }
 		public int Coins { get; set; }
 		public int Turn { get; set; }
-
+		public int Score { get; set; }
 		public Building[,] Grid { get; set; }
 
 		public Game()
@@ -23,12 +24,13 @@ namespace NgeeAnnCity.Models
 			Id = randomNumber;
 			Turn = 1;
 		}
-		public Game(int id, int coins, Building[,] grid,int turn)
+		public Game(int id, int coins, Building[,] grid,int turn,int score)
 		{
 			Id = id;
 			Coins = coins;
 			Grid = grid;
 			Turn = turn;
+			Score = score;
 		}
 		
 

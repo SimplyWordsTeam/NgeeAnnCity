@@ -1,4 +1,8 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using System.Globalization;
+using NgeeAnnCity;
+
+
+// See https://aka.ms/new-console-template for more information
 
 bool isRunning = true;
 Console.WriteLine("Welcome, To Ngee Ann City");
@@ -18,6 +22,7 @@ while (isRunning)
 	{
 		case "1":
 			Console.WriteLine("Displaying high scores");
+
 			break;
 		case "2":
 			Console.WriteLine("Starting new game...");
