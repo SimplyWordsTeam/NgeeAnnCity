@@ -50,5 +50,28 @@ namespace NgeeAnnCity.Models
 			//implementation
 			return false;
 		}
+		public void DisplayGrid()
+		{
+			for (int i = 0; i < Grid.GetLength(0); i++)
+			{
+				for (int j = 0; j < Grid.GetLength(1); j++)
+				{
+					Console.Write("+---");
+				}
+				Console.WriteLine("+");
+				for (int j = 0; j < Grid.GetLength(1); j++)
+				{
+					Console.Write("| ");
+					Console.Write(Grid[i, j]?.ToString() ?? "R");
+					Console.Write(" ");
+				}
+				Console.WriteLine("|");
+			}
+			for (int i = 0; i < Grid.GetLength(0); i++)
+			{
+				Console.Write("+---");
+			}
+			Console.WriteLine("+");
+		}
 	}
 }

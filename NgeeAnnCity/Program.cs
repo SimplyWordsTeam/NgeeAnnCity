@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using NgeeAnnCity;
+using NgeeAnnCity.Models;
 
 
 // See https://aka.ms/new-console-template for more information
@@ -26,6 +27,8 @@ while (isRunning)
 			break;
 		case "2":
 			Console.WriteLine("Starting new game...");
+			Game game = new Game();
+
 			break;
 		case "3":
 			Console.WriteLine("Loading game...");
