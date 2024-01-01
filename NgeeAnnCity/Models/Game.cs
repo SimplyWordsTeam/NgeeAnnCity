@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
+using System.Numerics;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -153,15 +155,10 @@ namespace NgeeAnnCity.Models
 			while (true)
 			{
 				Console.WriteLine("Where would you like to place the building?");
-				Console.WriteLine("Please enter the X coordinate only");
+				Console.WriteLine("Please enter the X coordinate");
 				int x_axis = x_coordinate();
-				Console.WriteLine("Please enter the Y coordinate only");
-				int y_axis = Convert.ToInt32(Console.ReadLine());
-				while (y_axis > 20 || y_axis < 0)
-				{
-					Console.WriteLine("Please enter a valid Coordinate");
-					y_axis = Convert.ToInt32(Console.ReadLine());
-				}
+				Console.WriteLine(); //This is to make the menu smoother/look nicer
+				int y_axis = y_cooridnate();
 				y_axis -= 1;
 				x_axis -= 1; //Since the number starts from 0 instaed of 1, -1 is needed
 				if (check_building_connection(y_axis, x_axis) == true)
@@ -177,7 +174,31 @@ namespace NgeeAnnCity.Models
 					Console.WriteLine("Please choose a new area.");
 				}
 			}
+		}
+		//=======================================================================
+		// y_coordinate
 
+		private int y_cooridnate()
+		{
+			Console.WriteLine("Please enter the Y coordinate");
+			while (true)
+			{
+				try
+				{
+					int y_axis = Convert.ToInt32(Console.ReadLine());
+					while (y_axis > 20 || y_axis < 0)
+					{
+						Console.WriteLine("Please enter a valid Coordinate");
+						y_axis = Convert.ToInt32(Console.ReadLine());
+					}
+
+					return y_axis;
+				}
+				catch (Exception ex)
+				{
+					Console.WriteLine("Please enter a valid coordinate");
+				}
+			}
 		}
 		//=======================================================================
 		//Translate letter to number to be able to plot for Grid[x,y]
@@ -316,7 +337,6 @@ namespace NgeeAnnCity.Models
 				}
 				else
 				{
-					bool able_to_build = true;
 					int check_x_add = x + 1;
 					
 					int check_x_minus = x - 1;
@@ -325,8 +345,8 @@ namespace NgeeAnnCity.Models
 
 					int check_y_minus = y - 1;
 
-					if ((check_x_add) <= 20 && Grid[check_x_add, y] != null) //This is to check if the x value is bigger than 20 or smaller than 0 as if the value we place in the grid is bigger than the grid, and error would occur
-					{
+					if ((check_x_add) <= 20 && Grid[check_x_add, y] != null) //This is to check if the x value is bigger than 20 or smaller
+					{														 //than 0 as if the value we place in the grid is bigger than the grid, and error would occur
 						return true;
 					}
 					else if ((check_x_minus) >= 0 && Grid[check_x_minus, y] != null)
