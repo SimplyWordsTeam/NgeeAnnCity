@@ -103,6 +103,7 @@ namespace NgeeAnnCity.Models
 			bool chosen = false;
 			while (chosen == false) //Prompt for a choice after each round
 			{
+				Console.WriteLine();
 				Console.WriteLine("The buildings available for purchase are:");
 				Console.WriteLine("1. " + first_buildingchosen.Name + " Cost:" + first_buildingchosen.Cost);
 				Console.WriteLine("2. " + second_buildingchosen.Name + " Cost:" + second_buildingchosen.Cost);
@@ -113,11 +114,13 @@ namespace NgeeAnnCity.Models
 				{
 					
 					case "1":
+						Console.WriteLine();
 						Console.WriteLine("You have chosen:" + first_buildingchosen.Name);
 						buildingprompt(first_buildingchosen);
 						chosen = true;
 						break;
 					case "2":
+						Console.WriteLine();
 						Console.WriteLine("You have chosen:" + second_buildingchosen.Name);
 						buildingprompt(second_buildingchosen);
 						chosen = true;
@@ -157,7 +160,9 @@ namespace NgeeAnnCity.Models
 				}
 				else
 				{
-					Console.WriteLine("Please choose a new location to place this building at");
+					Console.WriteLine();
+					Console.WriteLine("There are no adjacent Buildings in this area, you are unable to build a building here.");
+					Console.WriteLine("Please choose a new area.");
 				}
 			}
 
@@ -328,59 +333,24 @@ namespace NgeeAnnCity.Models
 
 					int check_y_minus = y - 1;
 
-					if ((check_x_add) <= 20)
+					if ((check_x_add) <= 20 && Grid[check_x_add, y] != null) //This is to check if the x value is bigger than 20 or smaller than 0 as if the value we place in the grid is bigger than the grid, and error would occur
 					{
-
+						return true;
 					}
-
-					if ((x-1) < 0 && (y - 1) < 0) //This if statement is to make sure that when using Grid[x,y] I do not have an error where the 
+					else if ((check_x_minus) >= 0 && Grid[check_x_minus, y] != null)
 					{
-						if (Grid[x + 1, y] != null || Grid[x, y + 1] != null)
-						{
-							return true;
-						}
-						else
-						{
-							Console.WriteLine("There are no buildings next to this area, you are unable to build a new building here.");
-							return false;
-						}
+						return true;
 					}
-					else if ((x-1) < 0 && (y-1) > 0)
+					else if ((check_y_add) <= 20 && Grid[x, check_y_add] != null)
 					{
-						if (Grid[x + 1, y] != null || Grid[x, y + 1] != null || Grid[x, y - 1] != null)
-						{
-							return true;
-						}
-						else
-						{
-							Console.WriteLine("There are no buildings next to this area, you are unable to build a new building here.");
-							return false;
-						}
+						return true;
 					}
-					else if ((x-1) > 0 && (y-1) < 0)
+					else if ((check_y_minus) >= 0 && Grid[x, check_y_minus] != null)
 					{
-						if (Grid[x + 1, y] != null || Grid[x, y + 1] != null || Grid[x - 1, y] != null)
-						{
-							return true;
-						}
-						else
-						{
-							Console.WriteLine("There are no buildings next to this area, you are unable to build a new building here.");
-							return false;
-						}
+						return true;
 					}
-					else
-					{
-						if (Grid[x + 1, y] != null || Grid[x, y + 1] != null || Grid[x, y - 1] != null || Grid[x - 1, y] != null)
-						{
-							return true;
-						}
-						else
-						{
-							Console.WriteLine("There are no buildings next to this area, you are unable to build a new building here.");
-							return false;
-						}
-					}
+					else //If all 4 sides does not have a building return false
+					{ return false; }
 				}
 			}
 			else

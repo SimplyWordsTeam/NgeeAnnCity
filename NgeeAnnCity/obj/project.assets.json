@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\rscre\\Source\\Repos\\SimplyWordsTeam\\NgeeAnnCity\\NgeeAnnCity\\NgeeAnnCity.csproj",
+      "projectUniqueName": "C:\\Users\\rscre\\Source\\Repos\\NgeeAnnCity\\NgeeAnnCity\\NgeeAnnCity.csproj",
       "projectName": "NgeeAnnCity",
-      "projectPath": "C:\\Users\\rscre\\Source\\Repos\\SimplyWordsTeam\\NgeeAnnCity\\NgeeAnnCity\\NgeeAnnCity.csproj",
+      "projectPath": "C:\\Users\\rscre\\Source\\Repos\\NgeeAnnCity\\NgeeAnnCity\\NgeeAnnCity.csproj",
       "packagesPath": "C:\\Users\\rscre\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\rscre\\Source\\Repos\\SimplyWordsTeam\\NgeeAnnCity\\NgeeAnnCity\\obj\\",
+      "outputPath": "C:\\Users\\rscre\\Source\\Repos\\NgeeAnnCity\\NgeeAnnCity\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\rscre\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -61,7 +61,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
       }
     }
   }
