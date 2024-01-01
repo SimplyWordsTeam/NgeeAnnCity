@@ -33,7 +33,11 @@ while (isRunning)
 			while (gameplay)
 			{
 				game.DisplayGrid();
-				game.Menu();
+				if (game.Menu() == false)
+				{
+					gameplay = false;
+				}
+				game.nextTurn();
 			}
 			
 			break;

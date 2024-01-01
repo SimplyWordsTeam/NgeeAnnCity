@@ -1,0 +1,60 @@
+E:\Ngee Ann Poly\Temp\Assignment\NgeeAnnCity\NgeeAnnCity\bin\Debug\net6.0\NgeeAnnCity.exe
+E:\Ngee Ann Poly\Temp\Assignment\NgeeAnnCity\NgeeAnnCity\bin\Debug\net6.0\NgeeAnnCity.deps.json
+E:\Ngee Ann Poly\Temp\Assignment\NgeeAnnCity\NgeeAnnCity\bin\Debug\net6.0\NgeeAnnCity.runtimeconfig.json
+E:\Ngee Ann Poly\Temp\Assignment\NgeeAnnCity\NgeeAnnCity\bin\Debug\net6.0\NgeeAnnCity.dll
+E:\Ngee Ann Poly\Temp\Assignment\NgeeAnnCity\NgeeAnnCity\bin\Debug\net6.0\NgeeAnnCity.pdb
+E:\Ngee Ann Poly\Temp\Assignment\NgeeAnnCity\NgeeAnnCity\obj\Debug\net6.0\NgeeAnnCity.csproj.AssemblyReference.cache
+E:\Ngee Ann Poly\Temp\Assignment\NgeeAnnCity\NgeeAnnCity\obj\Debug\net6.0\NgeeAnnCity.GeneratedMSBuildEditorConfig.editorconfig
+E:\Ngee Ann Poly\Temp\Assignment\NgeeAnnCity\NgeeAnnCity\obj\Debug\net6.0\NgeeAnnCity.AssemblyInfoInputs.cache
+E:\Ngee Ann Poly\Temp\Assignment\NgeeAnnCity\NgeeAnnCity\obj\Debug\net6.0\NgeeAnnCity.AssemblyInfo.cs
+E:\Ngee Ann Poly\Temp\Assignment\NgeeAnnCity\NgeeAnnCity\obj\Debug\net6.0\NgeeAnnCity.csproj.CoreCompileInputs.cache
+E:\Ngee Ann Poly\Temp\Assignment\NgeeAnnCity\NgeeAnnCity\obj\Debug\net6.0\NgeeAnnCity.dll
+E:\Ngee Ann Poly\Temp\Assignment\NgeeAnnCity\NgeeAnnCity\obj\Debug\net6.0\refint\NgeeAnnCity.dll
+E:\Ngee Ann Poly\Temp\Assignment\NgeeAnnCity\NgeeAnnCity\obj\Debug\net6.0\NgeeAnnCity.pdb
+E:\Ngee Ann Poly\Temp\Assignment\NgeeAnnCity\NgeeAnnCity\obj\Debug\net6.0\NgeeAnnCity.genruntimeconfig.cache
+E:\Ngee Ann Poly\Temp\Assignment\NgeeAnnCity\NgeeAnnCity\obj\Debug\net6.0\ref\NgeeAnnCity.dll
+E:\Ngee Ann Poly\Year2\Sem2\SDD\Assignment\Asg2\NgeeAnnCity\NgeeAnnCity\bin\Debug\net6.0\NgeeAnnCity.exe
+E:\Ngee Ann Poly\Year2\Sem2\SDD\Assignment\Asg2\NgeeAnnCity\NgeeAnnCity\bin\Debug\net6.0\NgeeAnnCity.deps.json
+E:\Ngee Ann Poly\Year2\Sem2\SDD\Assignment\Asg2\NgeeAnnCity\NgeeAnnCity\bin\Debug\net6.0\NgeeAnnCity.runtimeconfig.json
+E:\Ngee Ann Poly\Year2\Sem2\SDD\Assignment\Asg2\NgeeAnnCity\NgeeAnnCity\bin\Debug\net6.0\NgeeAnnCity.dll
+E:\Ngee Ann Poly\Year2\Sem2\SDD\Assignment\Asg2\NgeeAnnCity\NgeeAnnCity\bin\Debug\net6.0\NgeeAnnCity.pdb
+E:\Ngee Ann Poly\Year2\Sem2\SDD\Assignment\Asg2\NgeeAnnCity\NgeeAnnCity\obj\Debug\net6.0\NgeeAnnCity.csproj.AssemblyReference.cache
+E:\Ngee Ann Poly\Year2\Sem2\SDD\Assignment\Asg2\NgeeAnnCity\NgeeAnnCity\obj\Debug\net6.0\NgeeAnnCity.GeneratedMSBuildEditorConfig.editorconfig
+E:\Ngee Ann Poly\Year2\Sem2\SDD\Assignment\Asg2\NgeeAnnCity\NgeeAnnCity\obj\Debug\net6.0\NgeeAnnCity.AssemblyInfoInputs.cache
+E:\Ngee Ann Poly\Year2\Sem2\SDD\Assignment\Asg2\NgeeAnnCity\NgeeAnnCity\obj\Debug\net6.0\NgeeAnnCity.AssemblyInfo.cs
+E:\Ngee Ann Poly\Year2\Sem2\SDD\Assignment\Asg2\NgeeAnnCity\NgeeAnnCity\obj\Debug\net6.0\NgeeAnnCity.csproj.CoreCompileInputs.cache
+E:\Ngee Ann Poly\Year2\Sem2\SDD\Assignment\Asg2\NgeeAnnCity\NgeeAnnCity\obj\Debug\net6.0\NgeeAnnCity.dll
+E:\Ngee Ann Poly\Year2\Sem2\SDD\Assignment\Asg2\NgeeAnnCity\NgeeAnnCity\obj\Debug\net6.0\refint\NgeeAnnCity.dll
+E:\Ngee Ann Poly\Year2\Sem2\SDD\Assignment\Asg2\NgeeAnnCity\NgeeAnnCity\obj\Debug\net6.0\NgeeAnnCity.pdb
+E:\Ngee Ann Poly\Year2\Sem2\SDD\Assignment\Asg2\NgeeAnnCity\NgeeAnnCity\obj\Debug\net6.0\NgeeAnnCity.genruntimeconfig.cache
+E:\Ngee Ann Poly\Year2\Sem2\SDD\Assignment\Asg2\NgeeAnnCity\NgeeAnnCity\obj\Debug\net6.0\ref\NgeeAnnCity.dll
+C:\Users\rscre\Source\Repos\NgeeAnnCity\NgeeAnnCity\bin\Debug\net6.0\NgeeAnnCity.exe
+C:\Users\rscre\Source\Repos\NgeeAnnCity\NgeeAnnCity\bin\Debug\net6.0\NgeeAnnCity.deps.json
+C:\Users\rscre\Source\Repos\NgeeAnnCity\NgeeAnnCity\bin\Debug\net6.0\NgeeAnnCity.runtimeconfig.json
+C:\Users\rscre\Source\Repos\NgeeAnnCity\NgeeAnnCity\bin\Debug\net6.0\NgeeAnnCity.dll
+C:\Users\rscre\Source\Repos\NgeeAnnCity\NgeeAnnCity\bin\Debug\net6.0\NgeeAnnCity.pdb
+C:\Users\rscre\Source\Repos\NgeeAnnCity\NgeeAnnCity\obj\Debug\net6.0\NgeeAnnCity.csproj.AssemblyReference.cache
+C:\Users\rscre\Source\Repos\NgeeAnnCity\NgeeAnnCity\obj\Debug\net6.0\NgeeAnnCity.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rscre\Source\Repos\NgeeAnnCity\NgeeAnnCity\obj\Debug\net6.0\NgeeAnnCity.AssemblyInfoInputs.cache
+C:\Users\rscre\Source\Repos\NgeeAnnCity\NgeeAnnCity\obj\Debug\net6.0\NgeeAnnCity.AssemblyInfo.cs
+C:\Users\rscre\Source\Repos\NgeeAnnCity\NgeeAnnCity\obj\Debug\net6.0\NgeeAnnCity.csproj.CoreCompileInputs.cache
+C:\Users\rscre\Source\Repos\NgeeAnnCity\NgeeAnnCity\obj\Debug\net6.0\NgeeAnnCity.dll
+C:\Users\rscre\Source\Repos\NgeeAnnCity\NgeeAnnCity\obj\Debug\net6.0\refint\NgeeAnnCity.dll
+C:\Users\rscre\Source\Repos\NgeeAnnCity\NgeeAnnCity\obj\Debug\net6.0\NgeeAnnCity.pdb
+C:\Users\rscre\Source\Repos\NgeeAnnCity\NgeeAnnCity\obj\Debug\net6.0\NgeeAnnCity.genruntimeconfig.cache
+C:\Users\rscre\Source\Repos\NgeeAnnCity\NgeeAnnCity\obj\Debug\net6.0\ref\NgeeAnnCity.dll
+C:\Users\rscre\Source\Repos\SimplyWordsTeam\NgeeAnnCity\NgeeAnnCity\bin\Debug\net6.0\NgeeAnnCity.exe
+C:\Users\rscre\Source\Repos\SimplyWordsTeam\NgeeAnnCity\NgeeAnnCity\bin\Debug\net6.0\NgeeAnnCity.deps.json
+C:\Users\rscre\Source\Repos\SimplyWordsTeam\NgeeAnnCity\NgeeAnnCity\bin\Debug\net6.0\NgeeAnnCity.runtimeconfig.json
+C:\Users\rscre\Source\Repos\SimplyWordsTeam\NgeeAnnCity\NgeeAnnCity\bin\Debug\net6.0\NgeeAnnCity.dll
+C:\Users\rscre\Source\Repos\SimplyWordsTeam\NgeeAnnCity\NgeeAnnCity\bin\Debug\net6.0\NgeeAnnCity.pdb
+C:\Users\rscre\Source\Repos\SimplyWordsTeam\NgeeAnnCity\NgeeAnnCity\obj\Debug\net6.0\NgeeAnnCity.csproj.AssemblyReference.cache
+C:\Users\rscre\Source\Repos\SimplyWordsTeam\NgeeAnnCity\NgeeAnnCity\obj\Debug\net6.0\NgeeAnnCity.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rscre\Source\Repos\SimplyWordsTeam\NgeeAnnCity\NgeeAnnCity\obj\Debug\net6.0\NgeeAnnCity.AssemblyInfoInputs.cache
+C:\Users\rscre\Source\Repos\SimplyWordsTeam\NgeeAnnCity\NgeeAnnCity\obj\Debug\net6.0\NgeeAnnCity.AssemblyInfo.cs
+C:\Users\rscre\Source\Repos\SimplyWordsTeam\NgeeAnnCity\NgeeAnnCity\obj\Debug\net6.0\NgeeAnnCity.csproj.CoreCompileInputs.cache
+C:\Users\rscre\Source\Repos\SimplyWordsTeam\NgeeAnnCity\NgeeAnnCity\obj\Debug\net6.0\NgeeAnnCity.dll
+C:\Users\rscre\Source\Repos\SimplyWordsTeam\NgeeAnnCity\NgeeAnnCity\obj\Debug\net6.0\refint\NgeeAnnCity.dll
+C:\Users\rscre\Source\Repos\SimplyWordsTeam\NgeeAnnCity\NgeeAnnCity\obj\Debug\net6.0\NgeeAnnCity.pdb
+C:\Users\rscre\Source\Repos\SimplyWordsTeam\NgeeAnnCity\NgeeAnnCity\obj\Debug\net6.0\NgeeAnnCity.genruntimeconfig.cache
+C:\Users\rscre\Source\Repos\SimplyWordsTeam\NgeeAnnCity\NgeeAnnCity\obj\Debug\net6.0\ref\NgeeAnnCity.dll

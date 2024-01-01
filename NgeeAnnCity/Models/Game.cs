@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
+using System.Numerics;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +25,7 @@ namespace NgeeAnnCity.Models
 			Grid = new Building[20, 20];
 			Id = randomNumber;
 			Turn = 1;
+			Console.WriteLine(Grid[0, 0]?.Name.ToString() ?? "null" + "hi");
 		}
 		public Game(int id, int coins, Building[,] grid,int turn,int score)
 		{
@@ -32,11 +35,12 @@ namespace NgeeAnnCity.Models
 			Turn = turn;
 			Score = score;
 		}
-		
-		public void Menu()
+		//=======================================================================
+		//Menu
+		public bool Menu()
 		{
-			bool turnend = true;
-			while (turnend)
+			bool turnend = false;
+			while (turnend == false)
 			{
 				Console.WriteLine("Coins: " + Coins + "  Turn: " + Turn + "  Score: " + Score);
 				Console.WriteLine("What would you like to do?");
@@ -51,10 +55,13 @@ namespace NgeeAnnCity.Models
 					case "1":
 						Console.WriteLine("Displaying Available Buildings");
 						buildingselection();
+						turnend = true;
 						break;
 					case "2":
 						Console.WriteLine("Saving Game...");
-						turnend = false;
+						//implementation
+
+						Console.WriteLine("Save Game function is not implemented yet");
 						break;
 					case "3":
 						Console.WriteLine("Ending Turn...");
@@ -63,23 +70,24 @@ namespace NgeeAnnCity.Models
 						break;
 					case "4":
 						Console.WriteLine("Returning to Main Menu...");
-						turnend = true;
-						break;
+						return false;
 					default:
 						Console.WriteLine("Invalid input");
 						break;
 				}
 			}
-			
+			return true; 
 
 		}
-
+		//=======================================================================
+		// Turn
 		public void nextTurn()
 		{
 			//increment turn by 1
 			Turn += 1;
 		}
-
+		//=======================================================================
+		//Building codes
 		public void buildingselection()
 		{
 			Random random = new Random();
@@ -98,52 +106,102 @@ namespace NgeeAnnCity.Models
 			}
 			Building second_buildingchosen = GetBuildingSubclass(randombuilding_second); // To get the building info
 			bool chosen = false;
-			while (chosen == false)
+			while (chosen == false) //Prompt for a choice after each round
 			{
+				Console.WriteLine();
 				Console.WriteLine("The buildings available for purchase are:");
 				Console.WriteLine("1. " + first_buildingchosen.Name + " Cost:" + first_buildingchosen.Cost);
 				Console.WriteLine("2. " + second_buildingchosen.Name + " Cost:" + second_buildingchosen.Cost);
 				Console.WriteLine("3. End Turn");
 				string input = Console.ReadLine();
 
-				switch (input)
+				try
 				{
-					
-					case "1":
-						Console.WriteLine("You have chosen:" + first_buildingchosen.Name);
-						buildingprompt(first_buildingchosen);
-						break;
-					case "2":
-						Console.WriteLine("You have chosen:" + second_buildingchosen.Name);
-						buildingprompt(second_buildingchosen);
-						break;
-					case "3":
-						break;
-					default:
-						Console.WriteLine("Invalid input");
-						break;
+					switch (input)// different selections choices 
+					{
+						case "1":
+							Console.WriteLine();
+							Console.WriteLine("You have chosen:" + first_buildingchosen.Name);
+							buildingprompt(first_buildingchosen);
+							chosen = true;
+							break;
+						case "2":
+							Console.WriteLine();
+							Console.WriteLine("You have chosen:" + second_buildingchosen.Name);
+							buildingprompt(second_buildingchosen);
+							chosen = true;
+
+							break;
+						case "3":
+							break;
+						default:
+							Console.WriteLine("Invalid input");
+							break;
+					}
 				}
+				catch (Exception ex) 
+				{
+					Console.WriteLine("Please enter a valid answer");
+				}
+				
 			}
 			
 
 		}
-
+		//=======================================================================
+		//Ask for building location
 		public void buildingprompt(Building Building)
 		{
-			Console.WriteLine("Where would you like to place the building?");
-			Console.WriteLine("Please enter the X coordinate only");
-			int x_axis = x_coordinate();
-			Console.WriteLine("Please enter the Y coordinate only");
-			int y_axis = Convert.ToInt32(Console.ReadLine());
-			while (y_axis > 20 || y_axis < 0) 
+			while (true)
 			{
-				Console.WriteLine("Please enter a valid Coordinate");
-				y_axis = Convert.ToInt32(Console.ReadLine());
+				Console.WriteLine("Where would you like to place the building?");
+				Console.WriteLine("Please enter the X coordinate");
+				int x_axis = x_coordinate();
+				Console.WriteLine(); //This is to make the menu smoother/look nicer
+				int y_axis = y_cooridnate();
+				y_axis -= 1;
+				x_axis -= 1; //Since the number starts from 0 instaed of 1, -1 is needed
+				if (check_building_connection(y_axis, x_axis) == true)
+				{
+					buildBuilding(y_axis, x_axis, Building);
+					Coins -= 1;
+					break;
+				}
+				else
+				{
+					Console.WriteLine();
+					Console.WriteLine("There are no adjacent Buildings in this area, you are unable to build a building here.");
+					Console.WriteLine("Please choose a new area.");
+				}
 			}
-
-			buildBuilding(x_axis, y_axis, Building);
 		}
+		//=======================================================================
+		// y_coordinate
 
+		private int y_cooridnate()
+		{
+			Console.WriteLine("Please enter the Y coordinate");
+			while (true)
+			{
+				try
+				{
+					int y_axis = Convert.ToInt32(Console.ReadLine());
+					while (y_axis > 20 || y_axis < 0)
+					{
+						Console.WriteLine("Please enter a valid Coordinate");
+						y_axis = Convert.ToInt32(Console.ReadLine());
+					}
+
+					return y_axis;
+				}
+				catch (Exception ex)
+				{
+					Console.WriteLine("Please enter a valid coordinate");
+				}
+			}
+		}
+		//=======================================================================
+		//Translate letter to number to be able to plot for Grid[x,y]
 		static int x_coordinate()
 		{
 			Console.Write("Enter a letter (A to T): ");
@@ -156,7 +214,6 @@ namespace NgeeAnnCity.Models
 				if (IsValidLetter(userInput))
 				{
 					numericValue = ConvertLetterToNumber(char.ToUpper(userInput));
-					Console.WriteLine($"\nThe numeric value of {userInput} is {numericValue}.");
 					loopend = false;
 				}
 				else
@@ -169,11 +226,14 @@ namespace NgeeAnnCity.Models
 			// Console.WriteLine(numericValue.ToString()); This line of code is to check if the value converted is correct
 			return numericValue;
 		}
+		//=======================================================================
+		//Check if the letter input is within range
 		static bool IsValidLetter(char letter)
 		{
 			return char.IsLetter(letter) && char.ToUpper(letter) >= 'A' && char.ToUpper(letter) <= 'T';
 		}
-
+		//=======================================================================
+		//Convert letter to number
 		static int ConvertLetterToNumber(char letter)
 		{
 			// Ensure the character is an uppercase letter
@@ -188,42 +248,14 @@ namespace NgeeAnnCity.Models
 				throw new ArgumentException("Input must be an uppercase letter.");
 			}
 		}
-
-		public void letterconverter()
+		//=======================================================================
+		// Code to place the building to the chosen area
+		public void buildBuilding(int x, int y, Building building)
 		{
-			char startLetter = 'A';
-			char endLetter = 'T';
-
-			for (char letter = startLetter; letter <= endLetter; letter++)
-			{
-				int numericValue = ConvertLetterToNumber(letter);
-				Console.WriteLine($"The numeric value of {letter} is {numericValue}.");
-			}
-
-			static int ConvertLetterToNumber(char letter)
-			{
-				// Ensure the character is an uppercase letter
-				if (char.IsUpper(letter))
-				{
-					// Calculate the numeric value based on the ASCII value of 'A'
-					return letter - 'A' + 1;
-				}
-				else
-				{
-					// Handle the case where the character is not an uppercase letter
-					throw new ArgumentException("Input must be an uppercase letter.");
-				}
-			}
+			Grid[x,y] = building;
 		}
-
-		public bool buildBuilding(int x, int y, Building building)
-		{
-
-			//Notes: Check if grid is empty before building
-			//implementation
-			return false;
-		}
-
+		//=======================================================================
+		//Used for the random number generator to pick a building to be chosen to be built
 		static Building GetBuildingSubclass(int index)
 		{
 			switch (index)
@@ -243,14 +275,15 @@ namespace NgeeAnnCity.Models
 					throw new ArgumentOutOfRangeException(nameof(index));
 			}
 		}
-
-
-
+		//=======================================================================
+		//Save game Function (To be made, delete the bracket words after done)
 		public bool SaveGame()
 		{
 			//implementation
 			return false;
 		}
+		//=======================================================================
+		//Function to display the playing field
 		public void DisplayGrid()
 		{
 			// Print the Y-axis labels
@@ -276,7 +309,7 @@ namespace NgeeAnnCity.Models
 				for (int j = 0; j < Grid.GetLength(1); j++)
 				{
 					Console.Write("| ");
-					Console.Write(Grid[i, j]?.ToString() ?? " ");
+					Console.Write(Grid[i, j]?.NameAbv.ToString() ?? " ");
 					Console.Write(" ");
 				}
 				Console.Write("|");
@@ -292,5 +325,52 @@ namespace NgeeAnnCity.Models
 			}
 			Console.WriteLine("+ ^ y-axis");
 		}
+		//=======================================================================
+		//Function to check if there are adjacent buildings so that we can check if the player is able to build the building at the area
+		public bool check_building_connection(int x, int y) // This function is to check if the buildings are connect to be built
+		{
+			if (Grid[x, y] == null)
+			{
+				if (Turn == 1)
+				{
+					return true;
+				}
+				else
+				{
+					int check_x_add = x + 1;
+					
+					int check_x_minus = x - 1;
+
+					int check_y_add = y + 1;
+
+					int check_y_minus = y - 1;
+
+					if ((check_x_add) <= 20 && Grid[check_x_add, y] != null) //This is to check if the x value is bigger than 20 or smaller
+					{														 //than 0 as if the value we place in the grid is bigger than the grid, and error would occur
+						return true;
+					}
+					else if ((check_x_minus) >= 0 && Grid[check_x_minus, y] != null)
+					{
+						return true;
+					}
+					else if ((check_y_add) <= 20 && Grid[x, check_y_add] != null)
+					{
+						return true;
+					}
+					else if ((check_y_minus) >= 0 && Grid[x, check_y_minus] != null)
+					{
+						return true;
+					}
+					else //If all 4 sides does not have a building return false
+					{ return false; }
+				}
+			}
+			else
+			{
+				Console.WriteLine("There is already a building in the selected section");
+				return false;
+			}
+		}
+		//=======================================================================
 	}
 }
