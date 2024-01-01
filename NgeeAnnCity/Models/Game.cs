@@ -23,6 +23,7 @@ namespace NgeeAnnCity.Models
 			Grid = new Building[20, 20];
 			Id = randomNumber;
 			Turn = 1;
+			Console.WriteLine(Grid[0, 0]?.Name.ToString() ?? "null" + "hi");
 		}
 		public Game(int id, int coins, Building[,] grid,int turn,int score)
 		{
@@ -33,10 +34,10 @@ namespace NgeeAnnCity.Models
 			Score = score;
 		}
 		
-		public void Menu()
+		public bool Menu()
 		{
-			bool turnend = true;
-			while (turnend)
+			bool turnend = false;
+			while (turnend == false)
 			{
 				Console.WriteLine("Coins: " + Coins + "  Turn: " + Turn + "  Score: " + Score);
 				Console.WriteLine("What would you like to do?");
@@ -51,10 +52,13 @@ namespace NgeeAnnCity.Models
 					case "1":
 						Console.WriteLine("Displaying Available Buildings");
 						buildingselection();
+						turnend = true;
 						break;
 					case "2":
 						Console.WriteLine("Saving Game...");
-						turnend = false;
+						//implementation
+
+						Console.WriteLine("Save Game function is not implemented yet");
 						break;
 					case "3":
 						Console.WriteLine("Ending Turn...");
@@ -63,14 +67,13 @@ namespace NgeeAnnCity.Models
 						break;
 					case "4":
 						Console.WriteLine("Returning to Main Menu...");
-						turnend = true;
-						break;
+						return false;
 					default:
 						Console.WriteLine("Invalid input");
 						break;
 				}
 			}
-			
+			return true; 
 
 		}
 
@@ -98,7 +101,7 @@ namespace NgeeAnnCity.Models
 			}
 			Building second_buildingchosen = GetBuildingSubclass(randombuilding_second); // To get the building info
 			bool chosen = false;
-			while (chosen == false)
+			while (chosen == false) //Prompt for a choice after each round
 			{
 				Console.WriteLine("The buildings available for purchase are:");
 				Console.WriteLine("1. " + first_buildingchosen.Name + " Cost:" + first_buildingchosen.Cost);
@@ -106,16 +109,19 @@ namespace NgeeAnnCity.Models
 				Console.WriteLine("3. End Turn");
 				string input = Console.ReadLine();
 
-				switch (input)
+				switch (input)// different selections choices 
 				{
 					
 					case "1":
 						Console.WriteLine("You have chosen:" + first_buildingchosen.Name);
 						buildingprompt(first_buildingchosen);
+						chosen = true;
 						break;
 					case "2":
 						Console.WriteLine("You have chosen:" + second_buildingchosen.Name);
 						buildingprompt(second_buildingchosen);
+						chosen = true;
+
 						break;
 					case "3":
 						break;
@@ -130,18 +136,31 @@ namespace NgeeAnnCity.Models
 
 		public void buildingprompt(Building Building)
 		{
-			Console.WriteLine("Where would you like to place the building?");
-			Console.WriteLine("Please enter the X coordinate only");
-			int x_axis = x_coordinate();
-			Console.WriteLine("Please enter the Y coordinate only");
-			int y_axis = Convert.ToInt32(Console.ReadLine());
-			while (y_axis > 20 || y_axis < 0) 
+			while (true)
 			{
-				Console.WriteLine("Please enter a valid Coordinate");
-				y_axis = Convert.ToInt32(Console.ReadLine());
+				Console.WriteLine("Where would you like to place the building?");
+				Console.WriteLine("Please enter the X coordinate only");
+				int x_axis = x_coordinate();
+				Console.WriteLine("Please enter the Y coordinate only");
+				int y_axis = Convert.ToInt32(Console.ReadLine());
+				while (y_axis > 20 || y_axis < 0)
+				{
+					Console.WriteLine("Please enter a valid Coordinate");
+					y_axis = Convert.ToInt32(Console.ReadLine());
+				}
+				y_axis -= 1;
+				x_axis -= 1; //Since the number starts from 0 instaed of 1, -1 is needed
+				if (check_building_connection(y_axis, x_axis) == true)
+				{
+					buildBuilding(y_axis, x_axis, Building);
+					break;
+				}
+				else
+				{
+					Console.WriteLine("Please choose a new location to place this building at");
+				}
 			}
 
-			buildBuilding(x_axis, y_axis, Building);
 		}
 
 		static int x_coordinate()
@@ -216,12 +235,9 @@ namespace NgeeAnnCity.Models
 			}
 		}
 
-		public bool buildBuilding(int x, int y, Building building)
+		public void buildBuilding(int x, int y, Building building)
 		{
-
-			//Notes: Check if grid is empty before building
-			//implementation
-			return false;
+			Grid[x,y] = building;
 		}
 
 		static Building GetBuildingSubclass(int index)
@@ -276,7 +292,7 @@ namespace NgeeAnnCity.Models
 				for (int j = 0; j < Grid.GetLength(1); j++)
 				{
 					Console.Write("| ");
-					Console.Write(Grid[i, j]?.ToString() ?? " ");
+					Console.Write(Grid[i, j]?.NameAbv.ToString() ?? " ");
 					Console.Write(" ");
 				}
 				Console.Write("|");
@@ -291,6 +307,87 @@ namespace NgeeAnnCity.Models
 				Console.Write("+---");
 			}
 			Console.WriteLine("+ ^ y-axis");
+		}
+
+		public bool check_building_connection(int x, int y) // This function is to check if the buildings are connect to be built
+		{
+			if (Grid[x, y] == null)
+			{
+				if (Turn == 1)
+				{
+					return true;
+				}
+				else
+				{
+					bool able_to_build = true;
+					int check_x_add = x + 1;
+					
+					int check_x_minus = x - 1;
+
+					int check_y_add = y + 1;
+
+					int check_y_minus = y - 1;
+
+					if ((check_x_add) <= 20)
+					{
+
+					}
+
+					if ((x-1) < 0 && (y - 1) < 0) //This if statement is to make sure that when using Grid[x,y] I do not have an error where the 
+					{
+						if (Grid[x + 1, y] != null || Grid[x, y + 1] != null)
+						{
+							return true;
+						}
+						else
+						{
+							Console.WriteLine("There are no buildings next to this area, you are unable to build a new building here.");
+							return false;
+						}
+					}
+					else if ((x-1) < 0 && (y-1) > 0)
+					{
+						if (Grid[x + 1, y] != null || Grid[x, y + 1] != null || Grid[x, y - 1] != null)
+						{
+							return true;
+						}
+						else
+						{
+							Console.WriteLine("There are no buildings next to this area, you are unable to build a new building here.");
+							return false;
+						}
+					}
+					else if ((x-1) > 0 && (y-1) < 0)
+					{
+						if (Grid[x + 1, y] != null || Grid[x, y + 1] != null || Grid[x - 1, y] != null)
+						{
+							return true;
+						}
+						else
+						{
+							Console.WriteLine("There are no buildings next to this area, you are unable to build a new building here.");
+							return false;
+						}
+					}
+					else
+					{
+						if (Grid[x + 1, y] != null || Grid[x, y + 1] != null || Grid[x, y - 1] != null || Grid[x - 1, y] != null)
+						{
+							return true;
+						}
+						else
+						{
+							Console.WriteLine("There are no buildings next to this area, you are unable to build a new building here.");
+							return false;
+						}
+					}
+				}
+			}
+			else
+			{
+				Console.WriteLine("There is already a building in the selected section");
+				return false;
+			}
 		}
 	}
 }
