@@ -33,7 +33,8 @@ namespace NgeeAnnCity.Models
 			Turn = turn;
 			Score = score;
 		}
-		
+		//=======================================================================
+		//Menu
 		public bool Menu()
 		{
 			bool turnend = false;
@@ -76,13 +77,15 @@ namespace NgeeAnnCity.Models
 			return true; 
 
 		}
-
+		//=======================================================================
+		// Turn
 		public void nextTurn()
 		{
 			//increment turn by 1
 			Turn += 1;
 		}
-
+		//=======================================================================
+		//Building codes
 		public void buildingselection()
 		{
 			Random random = new Random();
@@ -110,33 +113,41 @@ namespace NgeeAnnCity.Models
 				Console.WriteLine("3. End Turn");
 				string input = Console.ReadLine();
 
-				switch (input)// different selections choices 
+				try
 				{
-					
-					case "1":
-						Console.WriteLine();
-						Console.WriteLine("You have chosen:" + first_buildingchosen.Name);
-						buildingprompt(first_buildingchosen);
-						chosen = true;
-						break;
-					case "2":
-						Console.WriteLine();
-						Console.WriteLine("You have chosen:" + second_buildingchosen.Name);
-						buildingprompt(second_buildingchosen);
-						chosen = true;
+					switch (input)// different selections choices 
+					{
+						case "1":
+							Console.WriteLine();
+							Console.WriteLine("You have chosen:" + first_buildingchosen.Name);
+							buildingprompt(first_buildingchosen);
+							chosen = true;
+							break;
+						case "2":
+							Console.WriteLine();
+							Console.WriteLine("You have chosen:" + second_buildingchosen.Name);
+							buildingprompt(second_buildingchosen);
+							chosen = true;
 
-						break;
-					case "3":
-						break;
-					default:
-						Console.WriteLine("Invalid input");
-						break;
+							break;
+						case "3":
+							break;
+						default:
+							Console.WriteLine("Invalid input");
+							break;
+					}
 				}
+				catch (Exception ex) 
+				{
+					Console.WriteLine("Please enter a valid answer");
+				}
+				
 			}
 			
 
 		}
-
+		//=======================================================================
+		//Ask for building location
 		public void buildingprompt(Building Building)
 		{
 			while (true)
@@ -156,6 +167,7 @@ namespace NgeeAnnCity.Models
 				if (check_building_connection(y_axis, x_axis) == true)
 				{
 					buildBuilding(y_axis, x_axis, Building);
+					Coins -= 1;
 					break;
 				}
 				else
@@ -167,7 +179,8 @@ namespace NgeeAnnCity.Models
 			}
 
 		}
-
+		//=======================================================================
+		//Translate letter to number to be able to plot for Grid[x,y]
 		static int x_coordinate()
 		{
 			Console.Write("Enter a letter (A to T): ");
@@ -180,7 +193,6 @@ namespace NgeeAnnCity.Models
 				if (IsValidLetter(userInput))
 				{
 					numericValue = ConvertLetterToNumber(char.ToUpper(userInput));
-					Console.WriteLine($"\nThe numeric value of {userInput} is {numericValue}.");
 					loopend = false;
 				}
 				else
@@ -193,11 +205,14 @@ namespace NgeeAnnCity.Models
 			// Console.WriteLine(numericValue.ToString()); This line of code is to check if the value converted is correct
 			return numericValue;
 		}
+		//=======================================================================
+		//Check if the letter input is within range
 		static bool IsValidLetter(char letter)
 		{
 			return char.IsLetter(letter) && char.ToUpper(letter) >= 'A' && char.ToUpper(letter) <= 'T';
 		}
-
+		//=======================================================================
+		//Convert letter to number
 		static int ConvertLetterToNumber(char letter)
 		{
 			// Ensure the character is an uppercase letter
@@ -212,39 +227,14 @@ namespace NgeeAnnCity.Models
 				throw new ArgumentException("Input must be an uppercase letter.");
 			}
 		}
-
-		public void letterconverter()
-		{
-			char startLetter = 'A';
-			char endLetter = 'T';
-
-			for (char letter = startLetter; letter <= endLetter; letter++)
-			{
-				int numericValue = ConvertLetterToNumber(letter);
-				Console.WriteLine($"The numeric value of {letter} is {numericValue}.");
-			}
-
-			static int ConvertLetterToNumber(char letter)
-			{
-				// Ensure the character is an uppercase letter
-				if (char.IsUpper(letter))
-				{
-					// Calculate the numeric value based on the ASCII value of 'A'
-					return letter - 'A' + 1;
-				}
-				else
-				{
-					// Handle the case where the character is not an uppercase letter
-					throw new ArgumentException("Input must be an uppercase letter.");
-				}
-			}
-		}
-
+		//=======================================================================
+		// Code to place the building to the chosen area
 		public void buildBuilding(int x, int y, Building building)
 		{
 			Grid[x,y] = building;
 		}
-
+		//=======================================================================
+		//Used for the random number generator to pick a building to be chosen to be built
 		static Building GetBuildingSubclass(int index)
 		{
 			switch (index)
@@ -264,14 +254,15 @@ namespace NgeeAnnCity.Models
 					throw new ArgumentOutOfRangeException(nameof(index));
 			}
 		}
-
-
-
+		//=======================================================================
+		//Save game Function (To be made, delete the bracket words after done)
 		public bool SaveGame()
 		{
 			//implementation
 			return false;
 		}
+		//=======================================================================
+		//Function to display the playing field
 		public void DisplayGrid()
 		{
 			// Print the Y-axis labels
@@ -313,7 +304,8 @@ namespace NgeeAnnCity.Models
 			}
 			Console.WriteLine("+ ^ y-axis");
 		}
-
+		//=======================================================================
+		//Function to check if there are adjacent buildings so that we can check if the player is able to build the building at the area
 		public bool check_building_connection(int x, int y) // This function is to check if the buildings are connect to be built
 		{
 			if (Grid[x, y] == null)
@@ -359,5 +351,6 @@ namespace NgeeAnnCity.Models
 				return false;
 			}
 		}
+		//=======================================================================
 	}
 }
