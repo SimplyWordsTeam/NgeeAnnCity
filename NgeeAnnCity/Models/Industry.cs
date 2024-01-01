@@ -23,21 +23,37 @@ namespace NgeeAnnCity.Models
 			//add 1 point for rthis idustry building
 			addedPoints = 1;
 			//if adjacent to Residential, add 1 point
-			if (grid[x_coord, y_coord + 1] is Residential)
+			
+			if (y_coord + 1 < 20)
 			{
-				addedPoints++;
+				if (grid[x_coord, y_coord + 1] is Residential)
+				{
+					addedPoints++;
+				}
 			}
-			if (grid[x_coord, y_coord - 1] is Residential)
+
+			if (y_coord - 1 >= 0)
 			{
-				addedPoints++;
+				if (grid[x_coord, y_coord - 1] is Residential)
+				{
+					addedPoints++;
+				}
 			}
-			if (grid[x_coord + 1, y_coord] is Residential)
+
+			if (x_coord + 1 < 20)
 			{
-				addedPoints++;
+				if (grid[x_coord + 1, y_coord] is Residential)
+				{
+					addedPoints++;
+				}
 			}
-			if (grid[x_coord - 1, y_coord] is Residential)
+
+			if (x_coord - 1 >= 0)
 			{
-				addedPoints++;
+				if (grid[x_coord - 1, y_coord] is Residential)
+				{
+					addedPoints++;
+				}
 			}
 
 
