@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using NgeeAnnCity;
 using NgeeAnnCity.Models;
 
@@ -27,11 +28,21 @@ while (isRunning)
 			break;
 		case "2":
 			Console.WriteLine("Starting new game...");
+			bool gameplay = true;
 			Game game = new Game();
-
+			while (gameplay)
+			{
+				game.DisplayGrid();
+				game.Menu();
+			}
+			
 			break;
 		case "3":
 			Console.WriteLine("Loading game...");
+			isRunning = false;
+			break;
+		case "4":
+			Console.WriteLine("Exiting game ...");
 			isRunning = false;
 			break;
 		default:

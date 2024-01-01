@@ -11,7 +11,8 @@ namespace NgeeAnnCity.Models
 		public Road()
 		{
 			Name = "Road";
-			NameAbv = "R";
+			NameAbv = "*";
+			Cost = 1;
 		}
 
 		public override int processPoints()

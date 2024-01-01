@@ -8,10 +8,11 @@ namespace NgeeAnnCity.Models
 {
 	internal class Park : Building
 	{
-		public Park()
+		public Park() :base()
 		{
 			Name = "Park";
-			NameAbv = "P";
+			NameAbv = "O";
+			Cost = 1;
 		}
 
 		public override int processPoints()

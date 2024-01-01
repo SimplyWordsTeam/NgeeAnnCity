@@ -13,7 +13,7 @@ namespace NgeeAnnCity.Models
 		{
 			Name = "Industry";
 			NameAbv = "I";
-			
+			Cost = 1;
 		}
 
 		public override int processPoints()

@@ -10,6 +10,7 @@ namespace NgeeAnnCity.Models
 	{
 		private string name;
 		private string nameAbv;
+		private int cost;
 		
 		//Getter and Setters
 		public string Name
@@ -21,6 +22,11 @@ namespace NgeeAnnCity.Models
 		{
 			get { return nameAbv; }
 			protected set { nameAbv = value; }
+		}
+		public int Cost
+		{
+			get { return cost; }
+			protected set { cost = value; }
 		}
 		public abstract int processPoints(); //operator for the logic to add points 
 
