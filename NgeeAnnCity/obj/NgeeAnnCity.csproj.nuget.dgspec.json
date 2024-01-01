@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\rscre\\Source\\Repos\\NgeeAnnCity\\NgeeAnnCity\\NgeeAnnCity.csproj": {}
+    "E:\\Ngee Ann Poly\\Year2\\Sem2\\SDD\\Assignment\\Asg2\\NgeeAnnCity\\NgeeAnnCity\\NgeeAnnCity.csproj": {}
   },
   "projects": {
-    "C:\\Users\\rscre\\Source\\Repos\\NgeeAnnCity\\NgeeAnnCity\\NgeeAnnCity.csproj": {
+    "E:\\Ngee Ann Poly\\Year2\\Sem2\\SDD\\Assignment\\Asg2\\NgeeAnnCity\\NgeeAnnCity\\NgeeAnnCity.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\rscre\\Source\\Repos\\NgeeAnnCity\\NgeeAnnCity\\NgeeAnnCity.csproj",
+        "projectUniqueName": "E:\\Ngee Ann Poly\\Year2\\Sem2\\SDD\\Assignment\\Asg2\\NgeeAnnCity\\NgeeAnnCity\\NgeeAnnCity.csproj",
         "projectName": "NgeeAnnCity",
-        "projectPath": "C:\\Users\\rscre\\Source\\Repos\\NgeeAnnCity\\NgeeAnnCity\\NgeeAnnCity.csproj",
-        "packagesPath": "C:\\Users\\rscre\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\rscre\\Source\\Repos\\NgeeAnnCity\\NgeeAnnCity\\obj\\",
+        "projectPath": "E:\\Ngee Ann Poly\\Year2\\Sem2\\SDD\\Assignment\\Asg2\\NgeeAnnCity\\NgeeAnnCity\\NgeeAnnCity.csproj",
+        "packagesPath": "C:\\Users\\ching\\.nuget\\packages\\",
+        "outputPath": "E:\\Ngee Ann Poly\\Year2\\Sem2\\SDD\\Assignment\\Asg2\\NgeeAnnCity\\NgeeAnnCity\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\rscre\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ching\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -55,7 +55,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
