@@ -37,6 +37,7 @@ while (isRunning)
 				{
 					gameplay = false;
 				}
+				game.processAllPoints();
 				game.nextTurn();
 			}
 			

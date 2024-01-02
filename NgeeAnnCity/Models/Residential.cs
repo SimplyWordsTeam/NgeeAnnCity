@@ -51,21 +51,33 @@ namespace NgeeAnnCity.Models
 			if (!isBesideIndustry)
 			{
 				//if adjacent to Residential, add 1 point
-				if (grid[x_coord, y_coord + 1] is Residential|| grid[x_coord, y_coord + 1] is Commercial)
+				if(y_coord + 1<20)
 				{
-					addedPoints++;
+					if (grid[x_coord, y_coord + 1] is Residential || grid[x_coord, y_coord + 1] is Commercial)
+					{
+						addedPoints++;
+					}
 				}
-				if (grid[x_coord, y_coord - 1] is Residential|| grid[x_coord, y_coord - 1] is Commercial)
+				if (y_coord - 1 >= 0)
 				{
-					addedPoints++;
+					if (grid[x_coord, y_coord - 1] is Residential || grid[x_coord, y_coord - 1] is Commercial)
+					{
+						addedPoints++;
+					}
 				}
-				if (grid[x_coord + 1, y_coord] is Residential|| grid[x_coord + 1, y_coord] is Commercial)
+				if (x_coord + 1 < 20)
 				{
-					addedPoints++;
+					if (grid[x_coord + 1, y_coord] is Residential || grid[x_coord + 1, y_coord] is Commercial)
+					{
+						addedPoints++;
+					}
 				}
-				if (grid[x_coord - 1, y_coord] is Residential|| grid[x_coord - 1, y_coord] is Commercial)
+				if (x_coord - 1 >= 0)
 				{
-					addedPoints++;
+					if (grid[x_coord - 1, y_coord] is Residential || grid[x_coord - 1, y_coord] is Commercial)
+					{
+						addedPoints++;
+					}
 				}
 
 

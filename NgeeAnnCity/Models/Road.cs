@@ -19,9 +19,21 @@ namespace NgeeAnnCity.Models
 		{
 			//implement the logic to add points for road here
 			int addedPoints = 0;
-			if (grid[x_coord, y_coord + 1] is Road )
+
+			if (x_coord + 1 < 20)
 			{
-				addedPoints++;
+				if (grid[x_coord + 1, y_coord] is Road)
+				{
+					addedPoints++;
+				}
+			}
+
+			if (x_coord - 1 >= 0)
+			{
+				if (grid[x_coord - 1, y_coord] is Road)
+				{
+					addedPoints++;
+				}
 			}
 			return addedPoints;
 		}

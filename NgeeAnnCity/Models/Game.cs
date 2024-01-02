@@ -75,25 +75,30 @@ namespace NgeeAnnCity.Models
 						Console.WriteLine("Invalid input");
 						break;
 				}
-				int rows=Grid.GetLength(0);
-				int columns = Grid.GetLength(1);
-				for (int x = 0; x < rows; x++)
-				{
-					for (int y = 0; y < columns; y++)
-					{
 
-						if (Grid[x, y] != null)
-						{
-							Grid[x, y].processPoints(Grid, x, y);
-						}
-					}
-				}
 			}
 			return true; 
 
 		}
 		//=======================================================================
 		// Turn
+		public void processAllPoints()
+		{
+			Console.WriteLine("processAllPointsRunning");
+			int rows = Grid.GetLength(0);
+			int columns = Grid.GetLength(1);
+			for (int x = 0; x < rows; x++)
+			{
+				for (int y = 0; y < columns; y++)
+				{
+
+					if (Grid[x, y] != null)
+					{
+						Grid[x, y].processPoints(Grid, x, y);
+					}
+				}
+			}
+		}
 		public void nextTurn()
 		{
 			//increment turn by 1
