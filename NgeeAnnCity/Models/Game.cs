@@ -81,7 +81,6 @@ namespace NgeeAnnCity.Models
 							break;
 						case "2":
 							Console.WriteLine("Saving Game...");
-							//implementation
 							SaveGame();
 							break;
 						case "3":
@@ -313,44 +312,7 @@ namespace NgeeAnnCity.Models
 					throw new ArgumentOutOfRangeException(nameof(index));
 			}
 		}
-		//=======================================================================
-		//Save game Function (To be made, delete the bracket words after done)
-		public bool SaveGame()
-		{
-            try
-            {
-                string filePath = "game_data.csv";
-
-                using (StreamWriter writer = new StreamWriter(filePath))
-                {
-                    // Write header for CSV file
-                    writer.WriteLine("Id,Coins,Turn,Score");
-
-                    // Write game data to the CSV file
-                    writer.WriteLine($"{Id},{Coins},{Turn},{Score}");
-
-                    // Additional code to save Grid data into CSV
-                    // Modify the loop according to your Grid structure
-                    for (int i = 0; i < Grid.GetLength(0); i++)
-                    {
-                        for (int j = 0; j < Grid.GetLength(1); j++)
-                        {
-                            // Assuming each element in the Grid is a Building object
-                            string buildingName = Grid[i, j]?.Name ?? "Empty";
-                            writer.WriteLine($"{i},{j},{buildingName}");
-                        }
-                    }
-                }
-
-                Console.WriteLine("Game Saved!");
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error saving game data: {ex.Message}");
-                return false;
-            }
-        }
+		
 		//=======================================================================
 		//Function to display the playing field
 		public void DisplayGrid()
@@ -441,69 +403,7 @@ namespace NgeeAnnCity.Models
 			}
 		}
 		//=======================================================================
-		//Checking leaderboard function
-
-
-		public class check_leaderboard_score
-		{
-			private List<Player> players;
-			private const string filePath = "leaderboard.txt";
-
-			public check_leaderboard_score()
-			{
-				players = new List<Player>();
-			}
-
-			public void AddPlayer(string name, int score)
-			{
-				players.Add(new Player(name, score));
-				SaveLeaderboard();
-			}
-
-			public List<Player> GetTopTenPlayers()
-			{
-				return players.OrderByDescending(player => player.Score).Take(10).ToList();
-			}
-
-			public void LoadLeaderboard()
-			{
-				if (File.Exists(filePath))
-				{
-					using (StreamReader reader = new StreamReader(filePath))
-					{
-						string line;
-						while ((line = reader.ReadLine()) != null)
-						{
-							string[] data = line.Split(',');
-							players.Add(new Player(data[0], int.Parse(data[1])));
-						}
-					}
-				}
-			}
-
-			private void SaveLeaderboard()
-			{
-				using (StreamWriter writer = new StreamWriter(filePath, false))
-				{
-					foreach (Player player in players)
-					{
-						writer.WriteLine($"{player.Name},{player.Score}");
-					}
-				}
-			}
-		}
-
-		public class Player
-		{
-			public string Name { get; set; }
-			public int Score { get; set; }
-
-			public Player(string name, int score)
-			{
-				Name = name;
-				Score = score;
-			}
-		}
+		//Load Game Function from saved file
 
         public bool LoadGame()
         {
@@ -572,11 +472,11 @@ namespace NgeeAnnCity.Models
                 return false;
             }
         }
+		//This code is to aid loadgame()
+		// Other methods and members...
 
-        // Other methods and members...
-
-        // Example method to retrieve Building object based on its abbreviated name
-        private Building GetBuildingByName(string buildingName)
+		// Example method to retrieve Building object based on its abbreviated name
+		private Building GetBuildingByName(string buildingName)
         {
             switch (buildingName)
             {
@@ -594,5 +494,44 @@ namespace NgeeAnnCity.Models
                     return null; // Handle unrecognized building names as needed
             }
         }
-    }
+		//=======================================================================
+		//Save game Function which creates a file locally to be saved
+		public bool SaveGame()
+		{
+            try
+            {
+                string filePath = "game_data.csv";
+
+                using (StreamWriter writer = new StreamWriter(filePath))
+                {
+                    // Write header for CSV file
+                    writer.WriteLine("Id,Coins,Turn,Score");
+
+                    // Write game data to the CSV file
+                    writer.WriteLine($"{Id},{Coins},{Turn},{Score}");
+
+                    // Additional code to save Grid data into CSV
+                    // Modify the loop according to your Grid structure
+                    for (int i = 0; i < Grid.GetLength(0); i++)
+                    {
+                        for (int j = 0; j < Grid.GetLength(1); j++)
+                        {
+                            // Assuming each element in the Grid is a Building object
+                            string buildingName = Grid[i, j]?.Name ?? "Empty";
+                            writer.WriteLine($"{i},{j},{buildingName}");
+                        }
+                    }
+                }
+
+                Console.WriteLine("Game Saved!");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error saving game data: {ex.Message}");
+                return false;
+            }
+        }
+		//=======================================================================
+	}
 }
