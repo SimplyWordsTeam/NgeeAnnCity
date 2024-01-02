@@ -123,9 +123,9 @@ namespace NgeeAnnCity.Models
 			Console.WriteLine("processAllPoints Running");
 			int rows = Grid.GetLength(0);
 			int columns = Grid.GetLength(1);
-			for (int x = 0; x < rows; x++)
+			for (int y = 0; y < rows; y++)
 			{
-				for (int y = 0; y < columns; y++)
+				for (int x = 0; x < columns; x++)
 				{
 
 					if (Grid[x, y] != null)

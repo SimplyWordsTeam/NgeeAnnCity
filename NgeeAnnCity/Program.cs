@@ -56,6 +56,7 @@ while (isRunning)
 					{
 						loadedGameplay = false;
 					}
+					loadedGame.processAllPoints();
 					loadedGame.nextTurn();
 				}
 			}
