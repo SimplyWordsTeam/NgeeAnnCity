@@ -6,6 +6,7 @@ using System.Numerics;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using static NgeeAnnCity.Models.Game;
 
 namespace NgeeAnnCity.Models
 {
@@ -20,14 +21,14 @@ namespace NgeeAnnCity.Models
 		public Game()
 		{
 			Random rnd = new Random();
-			int randomNumber=rnd.Next(1000, 9999);
+			int randomNumber = rnd.Next(1000, 9999);
 			Coins = 16;
 			Grid = new Building[20, 20];
 			Id = randomNumber;
 			Turn = 1;
 			Console.WriteLine(Grid[0, 0]?.Name.ToString() ?? "null" + "hi");
 		}
-		public Game(int id, int coins, Building[,] grid,int turn,int score)
+		public Game(int id, int coins, Building[,] grid, int turn, int score)
 		{
 			Id = id;
 			Coins = coins;
@@ -39,7 +40,7 @@ namespace NgeeAnnCity.Models
 		//Menu
 		public bool Menu()
 		{
-			if(Coins == 0)
+			if (Coins == 0)
 			{
 
 				Console.WriteLine("============================================");
@@ -49,14 +50,14 @@ namespace NgeeAnnCity.Models
 				Console.WriteLine("Saving score...");
 				Console.WriteLine("Score Saved and updated the leaderboard!");
 
-				check_leaderboard_score(); //////This is to be updated when the leaderboard feature is done 
-							///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-							///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-							///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-							//////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-				return false;
+                check_leaderboard_score(); //////This is to be updated when the leaderboard feature is done 
+                ///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                ///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                ///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                //////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                return false;
 			}
-			else if(Turn <= 400)
+			else if (Turn <= 400)
 			{
 				bool turnend = false;
 				while (turnend == false)
@@ -89,9 +90,9 @@ namespace NgeeAnnCity.Models
 							break;
 					}
 				}
-				return true; 
+				return true;
 			}
-			else 
+			else
 			{
 				Console.WriteLine("========================================");
 				Console.WriteLine("The game has ended Thanks for playing!");
@@ -101,13 +102,13 @@ namespace NgeeAnnCity.Models
 				Console.WriteLine("Returning to Main Menu");
 
 				check_leaderboard_score(); //////This is to be updated when the leaderboard feature is done 
-							///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-							///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-							///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-							//////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-				return false; 
+				///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+				///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+				///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+				//////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+				return false;
 			}
-			
+
 
 		}
 		//=======================================================================
@@ -170,13 +171,13 @@ namespace NgeeAnnCity.Models
 							break;
 					}
 				}
-				catch (Exception ex) 
+				catch (Exception ex)
 				{
 					Console.WriteLine("Please enter a valid answer");
 				}
-				
+
 			}
-			
+
 
 		}
 		//=======================================================================
@@ -283,7 +284,7 @@ namespace NgeeAnnCity.Models
 		// Code to place the building to the chosen area
 		public void buildBuilding(int x, int y, Building building)
 		{
-			Grid[x,y] = building;
+			Grid[x, y] = building;
 		}
 		//=======================================================================
 		//Used for the random number generator to pick a building to be chosen to be built
@@ -369,7 +370,7 @@ namespace NgeeAnnCity.Models
 				else
 				{
 					int check_x_add = x + 1;
-					
+
 					int check_x_minus = x - 1;
 
 					int check_y_add = y + 1;
@@ -377,7 +378,7 @@ namespace NgeeAnnCity.Models
 					int check_y_minus = y - 1;
 
 					if ((check_x_add) <= 20 && Grid[check_x_add, y] != null) //This is to check if the x value is bigger than 20 or smaller
-					{														 //than 0 as if the value we place in the grid is bigger than the grid, and error would occur
+					{                                                        //than 0 as if the value we place in the grid is bigger than the grid, and error would occur
 						return true;
 					}
 					else if ((check_x_minus) >= 0 && Grid[check_x_minus, y] != null)
@@ -404,9 +405,67 @@ namespace NgeeAnnCity.Models
 		}
 		//=======================================================================
 		//Checking leaderboard function
-		public void check_leaderboard_score()
-		{
 
+
+		public class check_leaderboard_score
+		{
+			private List<Player> players;
+			private const string filePath = "leaderboard.txt";
+
+			public check_leaderboard_score()
+			{
+				players = new List<Player>();
+			}
+
+			public void AddPlayer(string name, int score)
+			{
+				players.Add(new Player(name, score));
+				SaveLeaderboard();
+			}
+
+			public List<Player> GetTopTenPlayers()
+			{
+				return players.OrderByDescending(player => player.Score).Take(10).ToList();
+			}
+
+			public void LoadLeaderboard()
+			{
+				if (File.Exists(filePath))
+				{
+					using (StreamReader reader = new StreamReader(filePath))
+					{
+						string line;
+						while ((line = reader.ReadLine()) != null)
+						{
+							string[] data = line.Split(',');
+							players.Add(new Player(data[0], int.Parse(data[1])));
+						}
+					}
+				}
+			}
+
+			private void SaveLeaderboard()
+			{
+				using (StreamWriter writer = new StreamWriter(filePath, false))
+				{
+					foreach (Player player in players)
+					{
+						writer.WriteLine($"{player.Name},{player.Score}");
+					}
+				}
+			}
+		}
+
+		public class Player
+		{
+			public string Name { get; set; }
+			public int Score { get; set; }
+
+			public Player(string name, int score)
+			{
+				Name = name;
+				Score = score;
+			}
 		}
 	}
 }
