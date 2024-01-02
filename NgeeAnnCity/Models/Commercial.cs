@@ -21,23 +21,38 @@ namespace NgeeAnnCity.Models
 			// You need to provide the actual implementation based on your requirements
 			// For now, returning 0 as a placeholder
 			int addedPoints = 0;
-			if (grid[x_coord, y_coord + 1] is Residential|| grid[x_coord, y_coord + 1] is Commercial)
+			if (y_coord + 1 < 20)
 			{
-				addedPoints++;
-			}
-			if (grid[x_coord, y_coord - 1] is Residential || grid[x_coord, y_coord - 1] is Commercial)
-			{
-				addedPoints++;
-			}
-			if (grid[x_coord + 1, y_coord] is Residential || grid[x_coord + 1, y_coord] is Commercial)
-			{
-				addedPoints++;
+				if (grid[x_coord, y_coord + 1] is Residential || grid[x_coord, y_coord + 1] is Commercial)
+				{
+					addedPoints++;
+				}
 			}
 
-			if (grid[x_coord - 1, y_coord] is Residential|| grid[x_coord - 1, y_coord] is Commercial)
+			if (y_coord - 1 >= 0)
 			{
-				addedPoints++;
+				if (grid[x_coord, y_coord - 1] is Residential || grid[x_coord, y_coord - 1] is Commercial)
+				{
+					addedPoints++;
+				}
 			}
+
+			if (x_coord + 1 < 20)
+			{
+				if (grid[x_coord + 1, y_coord] is Residential || grid[x_coord + 1, y_coord] is Commercial)
+				{
+					addedPoints++;
+				}
+			}
+
+			if (x_coord - 1 >= 0)
+			{
+				if (grid[x_coord - 1, y_coord] is Residential || grid[x_coord - 1, y_coord] is Commercial)
+				{
+					addedPoints++;
+				}
+			}
+
 
 
 			return addedPoints;

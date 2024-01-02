@@ -23,56 +23,91 @@ namespace NgeeAnnCity.Models
 			// For now, returning 0 as a placeholder
 			int addedPoints = 0;
 			bool isBesideIndustry = false;
-			
+			bool yp1 = y_coord + 1 < 20;
+			bool ym1 = y_coord - 1 >= 0;
+			bool xp1 = x_coord + 1 < 20;
+			bool xm1 = x_coord - 1 >= 0;
 
-			if (grid[x_coord, y_coord+1] is Industry)
+			if (yp1)
 			{
-				isBesideIndustry = true;
+				if (grid[x_coord, y_coord + 1] is Industry)
+				{
+					isBesideIndustry = true;
+				}
 			}
-			else if (grid[x_coord, y_coord - 1] is Industry)
+			if (ym1)
 			{
-				isBesideIndustry = true;
+				if (grid[x_coord, y_coord - 1] is Industry)
+				{
+					isBesideIndustry = true;
+				}
 			}
-			else if (grid[x_coord+1, y_coord] is Industry)
+			if (xp1)
 			{
-				isBesideIndustry = true;
+				if (grid[x_coord + 1, y_coord] is Industry)
+				{
+					isBesideIndustry = true;
+				}
 			}
-			else if (grid[x_coord-1, y_coord] is Industry)
+			if (xm1)
 			{
-				isBesideIndustry = true;
+				if (grid[x_coord - 1, y_coord] is Industry)
+				{
+					isBesideIndustry = true;
+				}
 			}
-
 			if (isBesideIndustry)
 			{
+				Console.WriteLine("Residential: Residential is beside Industry");
 				addedPoints = 1;
 			}
-
-			
-			if (!isBesideIndustry)
+			else
 			{
 				//if adjacent to Residential, add 1 point
-				if (grid[x_coord, y_coord + 1] is Residential|| grid[x_coord, y_coord + 1] is Commercial)
+				if(y_coord + 1<20)
 				{
-					addedPoints++;
+					if (grid[x_coord, y_coord + 1] is Residential || grid[x_coord, y_coord + 1] is Commercial)
+					{
+						addedPoints++;
+					}
 				}
-				if (grid[x_coord, y_coord - 1] is Residential|| grid[x_coord, y_coord - 1] is Commercial)
+				if (y_coord - 1 >= 0)
 				{
-					addedPoints++;
+					if (grid[x_coord, y_coord - 1] is Residential || grid[x_coord, y_coord - 1] is Commercial)
+					{
+						addedPoints++;
+					}
 				}
-				if (grid[x_coord + 1, y_coord] is Residential|| grid[x_coord + 1, y_coord] is Commercial)
+				if (x_coord + 1 < 20)
 				{
-					addedPoints++;
+					if (grid[x_coord + 1, y_coord] is Residential || grid[x_coord + 1, y_coord] is Commercial)
+					{
+						addedPoints++;
+					}
 				}
-				if (grid[x_coord - 1, y_coord] is Residential|| grid[x_coord - 1, y_coord] is Commercial)
+				if (x_coord - 1 >= 0)
 				{
-					addedPoints++;
+					if (grid[x_coord - 1, y_coord] is Residential || grid[x_coord - 1, y_coord] is Commercial)
+					{
+						addedPoints++;
+					}
 				}
-
 
 				//if adjacent to Park, add 2 point
-				if (grid[x_coord, y_coord + 1] is Park)
+				if (y_coord + 1 < 20)
 				{
-					addedPoints+=2;
+					if (grid[x_coord, y_coord + 1] is Park)
+					{
+						addedPoints += 2;
+					}
+				}
+
+				if (y_coord - 1 >= 0)
+				{
+					if (grid[x_coord, y_coord - 1] is Park)
+					{
+						addedPoints += 2;
+					}
 				}
 				if (grid[x_coord, y_coord - 1] is Park)
 				{
