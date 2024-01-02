@@ -84,7 +84,7 @@ namespace NgeeAnnCity.Models
 		// Turn
 		public void processAllPoints()
 		{
-			Console.WriteLine("processAllPointsRunning");
+			Console.WriteLine("processAllPoints Running");
 			int rows = Grid.GetLength(0);
 			int columns = Grid.GetLength(1);
 			for (int x = 0; x < rows; x++)
@@ -94,7 +94,10 @@ namespace NgeeAnnCity.Models
 
 					if (Grid[x, y] != null)
 					{
-						Grid[x, y].processPoints(Grid, x, y);
+						Console.WriteLine("x: " + x + " y: " + y);
+						int addedPoints= Grid[x, y].processPoints(Grid, x, y);
+						Console.WriteLine("Added Points: " + addedPoints);
+						Score +=Grid[x, y].processPoints(Grid, x, y);
 					}
 				}
 			}
