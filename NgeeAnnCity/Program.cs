@@ -43,9 +43,23 @@ while (isRunning)
 			
 			break;
 		case "3":
-			Console.WriteLine("Loading game...");
-			isRunning = false;
-			break;
+            Console.WriteLine("Loading game...");
+            Game loadedGame = new Game(); // Create an instance of the Game class
+			if (loadedGame.LoadGame())
+			{ // Call the LoadGame() method
+				Console.WriteLine("Game loaded successfully!");
+				bool loadedGameplay = true;
+				while (loadedGameplay)
+				{
+					loadedGame.DisplayGrid();
+					if (loadedGame.Menu() == false)
+					{
+						loadedGameplay = false;
+					}
+					loadedGame.nextTurn();
+				}
+			}
+                break;
 		case "4":
 			Console.WriteLine("Exiting game ...");
 			isRunning = false;

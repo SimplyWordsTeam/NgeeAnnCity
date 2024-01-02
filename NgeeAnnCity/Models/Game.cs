@@ -6,6 +6,7 @@ using System.Numerics;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using static NgeeAnnCity.Models.Game;
 
 namespace NgeeAnnCity.Models
 {
@@ -20,14 +21,14 @@ namespace NgeeAnnCity.Models
 		public Game()
 		{
 			Random rnd = new Random();
-			int randomNumber=rnd.Next(1000, 9999);
+			int randomNumber = rnd.Next(1000, 9999);
 			Coins = 16;
 			Grid = new Building[20, 20];
 			Id = randomNumber;
 			Turn = 1;
 			Console.WriteLine(Grid[0, 0]?.Name.ToString() ?? "null" + "hi");
 		}
-		public Game(int id, int coins, Building[,] grid,int turn,int score)
+		public Game(int id, int coins, Building[,] grid, int turn, int score)
 		{
 			Id = id;
 			Coins = coins;
@@ -39,45 +40,80 @@ namespace NgeeAnnCity.Models
 		//Menu
 		public bool Menu()
 		{
-			bool turnend = false;
-			while (turnend == false)
+			if (Coins == 0)
 			{
-				Console.WriteLine("Coins: " + Coins + "  Turn: " + Turn + "  Score: " + Score);
-				Console.WriteLine("What would you like to do?");
-				Console.WriteLine("1. Build Buildings");
-				Console.WriteLine("2. Save Game (Does not end turn or exit game)");
-				Console.WriteLine("3. End Turn");
-				Console.WriteLine("4. Exit to Main Menu (Will not save Game)");
-				string input = Console.ReadLine();
 
-				switch (input)
-				{
-					case "1":
-						Console.WriteLine("Displaying Available Buildings");
-						buildingselection();
-						turnend = true;
-						break;
-					case "2":
-						Console.WriteLine("Saving Game...");
-						//implementation
+				Console.WriteLine("============================================");
+				Console.WriteLine("You have ran out of Coins!");
+				Console.WriteLine("The game have ended! Thanks for playing!");
+				Console.WriteLine("============================================");
+				Console.WriteLine("Saving score...");
+				Console.WriteLine("Score Saved and updated the leaderboard!");
 
-						Console.WriteLine("Save Game function is not implemented yet");
-						break;
-					case "3":
-						Console.WriteLine("Ending Turn...");
-						nextTurn();
-						turnend = true;
-						break;
-					case "4":
-						Console.WriteLine("Returning to Main Menu...");
-						return false;
-					default:
-						Console.WriteLine("Invalid input");
-						break;
-				}
+               check_leaderboard_score checkLeaderboardScore = new check_leaderboard_score();
+               List<Player> topTenPlayers = checkLeaderboardScore.GetTopTenPlayers();
 
+               foreach (Player player in topTenPlayers)
+               {
+                     Console.WriteLine($"Name: {player.Name}, Score: {player.Score}");
+               }
+              
+                return false;
 			}
-			return true; 
+			else if (Turn <= 400)
+			{
+				bool turnend = false;
+				while (turnend == false)
+				{
+					Console.WriteLine("Coins: " + Coins + "  Turn: " + Turn + "  Score: " + Score);
+					Console.WriteLine("What would you like to do?");
+					Console.WriteLine("1. Build Buildings");
+					Console.WriteLine("2. Save Game (Does not end turn or exit game)");
+					Console.WriteLine("3. Exit to Main Menu (Will not save Game)");
+					string input = Console.ReadLine();
+
+					switch (input)
+					{
+						case "1":
+							Console.WriteLine("Displaying Available Buildings");
+							buildingselection();
+							turnend = true;
+							break;
+						case "2":
+							Console.WriteLine("Saving Game...");
+							SaveGame();
+							break;
+						case "3":
+							Console.WriteLine("Returning to Main Menu...");
+							return false;
+						default:
+							Console.WriteLine("Invalid input");
+							break;
+					}
+				}
+				return true;
+			}
+			else
+			{
+				Console.WriteLine("========================================");
+				Console.WriteLine("The game has ended Thanks for playing!");
+				Console.WriteLine("Saving score to leaderboard....");
+				Console.WriteLine("Game Saved!");
+				Console.WriteLine("========================================");
+				Console.WriteLine("Returning to Main Menu");
+
+                check_leaderboard_score checkLeaderboardScore = new check_leaderboard_score();
+                List<Player> topTenPlayers = checkLeaderboardScore.GetTopTenPlayers();
+
+                foreach (Player player in topTenPlayers)
+                {
+                    Console.WriteLine($"Name: {player.Name}, Score: {player.Score}");
+                }
+
+             
+                return false;
+			}
+
 
 		}
 		//=======================================================================
@@ -160,13 +196,13 @@ namespace NgeeAnnCity.Models
 							break;
 					}
 				}
-				catch (Exception ex) 
+				catch (Exception ex)
 				{
 					Console.WriteLine("Please enter a valid answer");
 				}
-				
+
 			}
-			
+
 
 		}
 		//=======================================================================
@@ -273,7 +309,7 @@ namespace NgeeAnnCity.Models
 		// Code to place the building to the chosen area
 		public void buildBuilding(int x, int y, Building building)
 		{
-			Grid[x,y] = building;
+			Grid[x, y] = building;
 		}
 		//=======================================================================
 		//Used for the random number generator to pick a building to be chosen to be built
@@ -296,13 +332,7 @@ namespace NgeeAnnCity.Models
 					throw new ArgumentOutOfRangeException(nameof(index));
 			}
 		}
-		//=======================================================================
-		//Save game Function (To be made, delete the bracket words after done)
-		public bool SaveGame()
-		{
-			//implementation
-			return false;
-		}
+		
 		//=======================================================================
 		//Function to display the playing field
 		public void DisplayGrid()
@@ -359,7 +389,7 @@ namespace NgeeAnnCity.Models
 				else
 				{
 					int check_x_add = x + 1;
-					
+
 					int check_x_minus = x - 1;
 
 					int check_y_add = y + 1;
@@ -367,7 +397,7 @@ namespace NgeeAnnCity.Models
 					int check_y_minus = y - 1;
 
 					if ((check_x_add) <= 20 && Grid[check_x_add, y] != null) //This is to check if the x value is bigger than 20 or smaller
-					{														 //than 0 as if the value we place in the grid is bigger than the grid, and error would occur
+					{                                                        //than 0 as if the value we place in the grid is bigger than the grid, and error would occur
 						return true;
 					}
 					else if ((check_x_minus) >= 0 && Grid[check_x_minus, y] != null)
@@ -392,6 +422,136 @@ namespace NgeeAnnCity.Models
 				return false;
 			}
 		}
+		//=======================================================================
+		//Load Game Function from saved file
+
+        public bool LoadGame()
+        {
+            try
+            {
+                string filePath = "game_data.csv";
+
+                if (File.Exists(filePath))
+                {
+                    using (StreamReader reader = new StreamReader(filePath))
+                    {
+                        // Skip header line if exists
+                        reader.ReadLine();
+
+                        // Read game data (Id, Coins, Turn, Score)
+                        string[] gameData = reader.ReadLine()?.Split(',');
+                        if (gameData != null && gameData.Length >= 4)
+                        {
+                            Id = int.Parse(gameData[0]);
+                            Coins = int.Parse(gameData[1]);
+                            Turn = int.Parse(gameData[2]);
+                            Score = int.Parse(gameData[3]);
+                        }
+
+                        // Read and populate the Grid data (assuming the format x,y,BuildingName or Empty)
+                        while (!reader.EndOfStream)
+                        {
+                            string[] gridData = reader.ReadLine()?.Split(',');
+                            if (gridData != null && gridData.Length >= 3)
+                            {
+                                int x = int.Parse(gridData[0]);
+                                int y = int.Parse(gridData[1]);
+                                string buildingName = gridData[2];
+
+                                if (buildingName != "Empty")
+                                {
+                                    Building building = GetBuildingByName(buildingName);
+                                    if (building != null)
+                                    {
+                                        // Assign the retrieved Building object to the Grid
+                                        Grid[x, y] = building;
+                                    }
+                                    else
+                                    {
+                                        // Handle the case where the building type is not recognized
+                                        // or could not be instantiated
+                                        Console.WriteLine($"Unknown building type or error creating building at position ({x}, {y})");
+                                    }
+                                }
+                                // else: Skip assigning to Grid for "Empty" entries
+                            }
+                        }
+
+                        return true;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No game data file found.");
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error loading game data: {ex.Message}");
+                return false;
+            }
+        }
+		//This code is to aid loadgame()
+		// Other methods and members...
+
+		// Example method to retrieve Building object based on its abbreviated name
+		private Building GetBuildingByName(string buildingName)
+        {
+            switch (buildingName)
+            {
+                case "Park":
+                    return new Park();
+                case "Residential":
+                    return new Residential();
+                case "Industry":
+                    return new Industry();
+                case "Commercial":
+                    return new Commercial();
+                case "Road":
+                    return new Road();
+                default:
+                    return null; // Handle unrecognized building names as needed
+            }
+        }
+		//=======================================================================
+		//Save game Function which creates a file locally to be saved
+		public bool SaveGame()
+		{
+            try
+            {
+                string filePath = "game_data.csv";
+
+                using (StreamWriter writer = new StreamWriter(filePath))
+                {
+                    // Write header for CSV file
+                    writer.WriteLine("Id,Coins,Turn,Score");
+
+                    // Write game data to the CSV file
+                    writer.WriteLine($"{Id},{Coins},{Turn},{Score}");
+
+                    // Additional code to save Grid data into CSV
+                    // Modify the loop according to your Grid structure
+                    for (int i = 0; i < Grid.GetLength(0); i++)
+                    {
+                        for (int j = 0; j < Grid.GetLength(1); j++)
+                        {
+                            // Assuming each element in the Grid is a Building object
+                            string buildingName = Grid[i, j]?.Name ?? "Empty";
+                            writer.WriteLine($"{i},{j},{buildingName}");
+                        }
+                    }
+                }
+
+                Console.WriteLine("Game Saved!");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error saving game data: {ex.Message}");
+                return false;
+            }
+        }
 		//=======================================================================
 	}
 }
