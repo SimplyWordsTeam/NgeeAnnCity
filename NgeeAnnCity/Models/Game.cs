@@ -82,8 +82,7 @@ namespace NgeeAnnCity.Models
 						case "2":
 							Console.WriteLine("Saving Game...");
 							//implementation
-
-							Console.WriteLine("Save Game function is not implemented yet");
+							SaveGame();
 							break;
 						case "3":
 							Console.WriteLine("Returning to Main Menu...");
@@ -318,9 +317,40 @@ namespace NgeeAnnCity.Models
 		//Save game Function (To be made, delete the bracket words after done)
 		public bool SaveGame()
 		{
-			//implementation
-			return false;
-		}
+            try
+            {
+                string filePath = "game_data.csv";
+
+                using (StreamWriter writer = new StreamWriter(filePath))
+                {
+                    // Write header for CSV file
+                    writer.WriteLine("Id,Coins,Turn,Score");
+
+                    // Write game data to the CSV file
+                    writer.WriteLine($"{Id},{Coins},{Turn},{Score}");
+
+                    // Additional code to save Grid data into CSV
+                    // Modify the loop according to your Grid structure
+                    for (int i = 0; i < Grid.GetLength(0); i++)
+                    {
+                        for (int j = 0; j < Grid.GetLength(1); j++)
+                        {
+                            // Assuming each element in the Grid is a Building object
+                            string buildingName = Grid[i, j]?.Name ?? "Empty";
+                            writer.WriteLine($"{i},{j},{buildingName}");
+                        }
+                    }
+                }
+
+                Console.WriteLine("Game Saved!");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error saving game data: {ex.Message}");
+                return false;
+            }
+        }
 		//=======================================================================
 		//Function to display the playing field
 		public void DisplayGrid()
@@ -474,5 +504,95 @@ namespace NgeeAnnCity.Models
 				Score = score;
 			}
 		}
-	}
+
+        public bool LoadGame()
+        {
+            try
+            {
+                string filePath = "game_data.csv";
+
+                if (File.Exists(filePath))
+                {
+                    using (StreamReader reader = new StreamReader(filePath))
+                    {
+                        // Skip header line if exists
+                        reader.ReadLine();
+
+                        // Read game data (Id, Coins, Turn, Score)
+                        string[] gameData = reader.ReadLine()?.Split(',');
+                        if (gameData != null && gameData.Length >= 4)
+                        {
+                            Id = int.Parse(gameData[0]);
+                            Coins = int.Parse(gameData[1]);
+                            Turn = int.Parse(gameData[2]);
+                            Score = int.Parse(gameData[3]);
+                        }
+
+                        // Read and populate the Grid data (assuming the format x,y,BuildingName or Empty)
+                        while (!reader.EndOfStream)
+                        {
+                            string[] gridData = reader.ReadLine()?.Split(',');
+                            if (gridData != null && gridData.Length >= 3)
+                            {
+                                int x = int.Parse(gridData[0]);
+                                int y = int.Parse(gridData[1]);
+                                string buildingName = gridData[2];
+
+                                if (buildingName != "Empty")
+                                {
+                                    Building building = GetBuildingByName(buildingName);
+                                    if (building != null)
+                                    {
+                                        // Assign the retrieved Building object to the Grid
+                                        Grid[x, y] = building;
+                                    }
+                                    else
+                                    {
+                                        // Handle the case where the building type is not recognized
+                                        // or could not be instantiated
+                                        Console.WriteLine($"Unknown building type or error creating building at position ({x}, {y})");
+                                    }
+                                }
+                                // else: Skip assigning to Grid for "Empty" entries
+                            }
+                        }
+
+                        return true;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No game data file found.");
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error loading game data: {ex.Message}");
+                return false;
+            }
+        }
+
+        // Other methods and members...
+
+        // Example method to retrieve Building object based on its abbreviated name
+        private Building GetBuildingByName(string buildingName)
+        {
+            switch (buildingName)
+            {
+                case "Park":
+                    return new Park();
+                case "Residential":
+                    return new Residential();
+                case "Industry":
+                    return new Industry();
+                case "Commercial":
+                    return new Commercial();
+                case "Road":
+                    return new Road();
+                default:
+                    return null; // Handle unrecognized building names as needed
+            }
+        }
+    }
 }
