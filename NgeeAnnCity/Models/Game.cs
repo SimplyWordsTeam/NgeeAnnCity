@@ -50,11 +50,14 @@ namespace NgeeAnnCity.Models
 				Console.WriteLine("Saving score...");
 				Console.WriteLine("Score Saved and updated the leaderboard!");
 
-                check_leaderboard_score(); //////This is to be updated when the leaderboard feature is done 
-                ///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                ///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                ///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                //////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+               check_leaderboard_score checkLeaderboardScore = new check_leaderboard_score();
+               List<Player> topTenPlayers = checkLeaderboardScore.GetTopTenPlayers();
+
+               foreach (Player player in topTenPlayers)
+               {
+                     Console.WriteLine($"Name: {player.Name}, Score: {player.Score}");
+               }
+              
                 return false;
 			}
 			else if (Turn <= 400)
@@ -101,12 +104,16 @@ namespace NgeeAnnCity.Models
 				Console.WriteLine("========================================");
 				Console.WriteLine("Returning to Main Menu");
 
-				check_leaderboard_score(); //////This is to be updated when the leaderboard feature is done 
-				///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-				///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-				///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-				//////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-				return false;
+                check_leaderboard_score checkLeaderboardScore = new check_leaderboard_score();
+                List<Player> topTenPlayers = checkLeaderboardScore.GetTopTenPlayers();
+
+                foreach (Player player in topTenPlayers)
+                {
+                    Console.WriteLine($"Name: {player.Name}, Score: {player.Score}");
+                }
+
+             
+                return false;
 			}
 
 
