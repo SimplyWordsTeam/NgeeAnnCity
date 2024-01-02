@@ -39,7 +39,24 @@ namespace NgeeAnnCity.Models
 		//Menu
 		public bool Menu()
 		{
-			if(Turn <= 400)
+			if(Coins == 0)
+			{
+
+				Console.WriteLine("============================================");
+				Console.WriteLine("You have ran out of Coins!");
+				Console.WriteLine("The game have ended! Thanks for playing!");
+				Console.WriteLine("============================================");
+				Console.WriteLine("Saving score...");
+				Console.WriteLine("Score Saved and updated the leaderboard!");
+
+				SaveGame(); //////This is to be updated when the leaderboard feature is done 
+							///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+							///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+							///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+							//////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+				return false;
+			}
+			else if(Turn <= 400)
 			{
 				bool turnend = false;
 				while (turnend == false)
@@ -48,8 +65,7 @@ namespace NgeeAnnCity.Models
 					Console.WriteLine("What would you like to do?");
 					Console.WriteLine("1. Build Buildings");
 					Console.WriteLine("2. Save Game (Does not end turn or exit game)");
-					Console.WriteLine("3. End Turn");
-					Console.WriteLine("4. Exit to Main Menu (Will not save Game)");
+					Console.WriteLine("3. Exit to Main Menu (Will not save Game)");
 					string input = Console.ReadLine();
 
 					switch (input)
@@ -66,11 +82,6 @@ namespace NgeeAnnCity.Models
 							Console.WriteLine("Save Game function is not implemented yet");
 							break;
 						case "3":
-							Console.WriteLine("Ending Turn...");
-							nextTurn();
-							turnend = true;
-							break;
-						case "4":
 							Console.WriteLine("Returning to Main Menu...");
 							return false;
 						default:
