@@ -49,7 +49,7 @@ namespace NgeeAnnCity.Models
 				Console.WriteLine("Saving score...");
 				Console.WriteLine("Score Saved and updated the leaderboard!");
 
-				SaveGame(); //////This is to be updated when the leaderboard feature is done 
+				check_leaderboard_score(); //////This is to be updated when the leaderboard feature is done 
 							///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 							///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 							///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -100,7 +100,7 @@ namespace NgeeAnnCity.Models
 				Console.WriteLine("========================================");
 				Console.WriteLine("Returning to Main Menu");
 
-				SaveGame(); //////This is to be updated when the leaderboard feature is done 
+				check_leaderboard_score(); //////This is to be updated when the leaderboard feature is done 
 							///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 							///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 							///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -403,5 +403,10 @@ namespace NgeeAnnCity.Models
 			}
 		}
 		//=======================================================================
+		//Checking leaderboard function
+		public void check_leaderboard_score()
+		{
+
+		}
 	}
 }
