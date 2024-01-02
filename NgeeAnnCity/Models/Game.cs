@@ -39,44 +39,64 @@ namespace NgeeAnnCity.Models
 		//Menu
 		public bool Menu()
 		{
-			bool turnend = false;
-			while (turnend == false)
+			if(Turn <= 400)
 			{
-				Console.WriteLine("Coins: " + Coins + "  Turn: " + Turn + "  Score: " + Score);
-				Console.WriteLine("What would you like to do?");
-				Console.WriteLine("1. Build Buildings");
-				Console.WriteLine("2. Save Game (Does not end turn or exit game)");
-				Console.WriteLine("3. End Turn");
-				Console.WriteLine("4. Exit to Main Menu (Will not save Game)");
-				string input = Console.ReadLine();
-
-				switch (input)
+				bool turnend = false;
+				while (turnend == false)
 				{
-					case "1":
-						Console.WriteLine("Displaying Available Buildings");
-						buildingselection();
-						turnend = true;
-						break;
-					case "2":
-						Console.WriteLine("Saving Game...");
-						//implementation
+					Console.WriteLine("Coins: " + Coins + "  Turn: " + Turn + "  Score: " + Score);
+					Console.WriteLine("What would you like to do?");
+					Console.WriteLine("1. Build Buildings");
+					Console.WriteLine("2. Save Game (Does not end turn or exit game)");
+					Console.WriteLine("3. End Turn");
+					Console.WriteLine("4. Exit to Main Menu (Will not save Game)");
+					string input = Console.ReadLine();
 
-						Console.WriteLine("Save Game function is not implemented yet");
-						break;
-					case "3":
-						Console.WriteLine("Ending Turn...");
-						nextTurn();
-						turnend = true;
-						break;
-					case "4":
-						Console.WriteLine("Returning to Main Menu...");
-						return false;
-					default:
-						Console.WriteLine("Invalid input");
-						break;
+					switch (input)
+					{
+						case "1":
+							Console.WriteLine("Displaying Available Buildings");
+							buildingselection();
+							turnend = true;
+							break;
+						case "2":
+							Console.WriteLine("Saving Game...");
+							//implementation
+
+							Console.WriteLine("Save Game function is not implemented yet");
+							break;
+						case "3":
+							Console.WriteLine("Ending Turn...");
+							nextTurn();
+							turnend = true;
+							break;
+						case "4":
+							Console.WriteLine("Returning to Main Menu...");
+							return false;
+						default:
+							Console.WriteLine("Invalid input");
+							break;
+					}
 				}
+				return true; 
 			}
-			return true; 
+			else 
+			{
+				Console.WriteLine("========================================");
+				Console.WriteLine("The game has ended Thanks for playing!");
+				Console.WriteLine("Saving score to leaderboard....");
+				Console.WriteLine("Game Saved!");
+				Console.WriteLine("========================================");
+				Console.WriteLine("Returning to Main Menu");
+
+				SaveGame(); //////This is to be updated when the leaderboard feature is done 
+							///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+							///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+							///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+							//////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+				return false; 
+			}
+			
 
 		}
 		//=======================================================================
