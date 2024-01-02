@@ -109,17 +109,27 @@ namespace NgeeAnnCity.Models
 						addedPoints += 2;
 					}
 				}
-				if (grid[x_coord, y_coord - 1] is Park)
+				if (ym1) 
 				{
-					addedPoints+=2;
+					if (grid[x_coord, y_coord - 1] is Park)
+					{
+						addedPoints += 2;
+					}
 				}
-				if (grid[x_coord + 1, y_coord] is Park)
+				if (xp1)
 				{
-					addedPoints+=2;
+					if (grid[x_coord + 1, y_coord] is Park)
+					{
+						addedPoints += 2;
+					}
 				}
-				if (grid[x_coord - 1, y_coord] is Park)
-				{
-					addedPoints+=2;
+
+				if (xm1)
+				{ 
+					if (grid[x_coord - 1, y_coord] is Park)
+					{
+						addedPoints+=2;
+					}
 				}
 			}
 
