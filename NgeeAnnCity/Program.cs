@@ -37,7 +37,7 @@ while (isRunning)
 				{
 					gameplay = false;
 				}
-				game.processAllPoints();
+				game.ProcessAllPoints();
 				game.nextTurn();
 			}
 			
@@ -56,7 +56,7 @@ while (isRunning)
 					{
 						loadedGameplay = false;
 					}
-					loadedGame.processAllPoints();
+					loadedGame.ProcessAllPoints();
 					loadedGame.nextTurn();
 				}
 			}

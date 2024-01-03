@@ -118,22 +118,23 @@ namespace NgeeAnnCity.Models
 		}
 		//=======================================================================
 		// Turn
-		public void processAllPoints()
+		public void ProcessAllPoints()
 		{
-			Console.WriteLine("processAllPoints Running");
+			Console.WriteLine("Points Calculation...");
 			int rows = Grid.GetLength(0);
 			int columns = Grid.GetLength(1);
 			for (int y = 0; y < rows; y++)
 			{
 				for (int x = 0; x < columns; x++)
 				{
-
-					if (Grid[x, y] != null)
+					
+					if (Grid[y, x] != null)
 					{
-						Console.WriteLine("x: " + x + " y: " + y);
-						int addedPoints= Grid[x, y].processPoints(Grid, x, y);
-						Console.WriteLine("Added Points: " + addedPoints);
-						Score +=Grid[x, y].processPoints(Grid, x, y);
+						char xLetter = ConvertNumberToLetter(x + 1);
+						Console.Write("x: " + xLetter + " y: " + (y+1));
+						int addedPoints= Grid[y, x].ProcessPoints(Grid, y, x);
+						Console.WriteLine(" || Added Points: " + addedPoints);
+						Score += Grid[y, x].ProcessPoints(Grid, y, x);
 					}
 				}
 			}
@@ -303,6 +304,20 @@ namespace NgeeAnnCity.Models
 			{
 				// Handle the case where the character is not an uppercase letter
 				throw new ArgumentException("Input must be an uppercase letter.");
+			}
+		}
+		static char ConvertNumberToLetter(int number)
+		{
+			// Ensure the number is within the valid range for letters (1 to 26)
+			if (number >= 1 && number <= 26)
+			{
+				// Calculate the ASCII value of 'A' plus the offset
+				return (char)('A' + number - 1);
+			}
+			else
+			{
+				// Handle the case where the number is outside the valid range
+				throw new ArgumentException("Input must be between 1 and 26.");
 			}
 		}
 		//=======================================================================

@@ -16,7 +16,7 @@ namespace NgeeAnnCity.Models
 			NameAbv = "R";
 			Cost = 1;
 		}
-		public override int processPoints(Building[,] grid, int x_coord, int y_coord)
+		public override int ProcessPoints(Building[,] grid, int x_coord, int y_coord)
 		{
 			// Implement the logic for processing points in the Commercial subclass
 			// You need to provide the actual implementation based on your requirements
@@ -58,12 +58,11 @@ namespace NgeeAnnCity.Models
 			}
 			if (isBesideIndustry)
 			{
-				Console.WriteLine("Residential: Residential is beside Industry");
 				addedPoints = 1;
 			}
 			else
 			{
-				//if adjacent to Residential, add 1 point
+				//if adjacent to Residential or commercial, add 1 point
 				if(y_coord + 1<20)
 				{
 					if (grid[x_coord, y_coord + 1] is Residential || grid[x_coord, y_coord + 1] is Commercial)
@@ -103,13 +102,6 @@ namespace NgeeAnnCity.Models
 				}
 
 				if (y_coord - 1 >= 0)
-				{
-					if (grid[x_coord, y_coord - 1] is Park)
-					{
-						addedPoints += 2;
-					}
-				}
-				if (ym1) 
 				{
 					if (grid[x_coord, y_coord - 1] is Park)
 					{

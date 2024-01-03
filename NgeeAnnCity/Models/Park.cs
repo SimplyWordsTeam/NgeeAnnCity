@@ -15,7 +15,7 @@ namespace NgeeAnnCity.Models
 			Cost = 1;
 		}
 
-		public override int processPoints(Building[,] grid,int x_coord,int y_coord)
+		public override int ProcessPoints(Building[,] grid,int x_coord,int y_coord)
 		{
 			//implement the logic to add points for park here
 			int addedPoints = 0;
