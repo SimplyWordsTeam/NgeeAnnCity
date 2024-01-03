@@ -17,3 +17,4 @@ namespace NgeeAnnCity.Models
             Score = score;
         }
     }
+}
