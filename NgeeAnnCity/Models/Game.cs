@@ -43,21 +43,32 @@ namespace NgeeAnnCity.Models
 			if (Coins == 0)
 			{
 
-				Console.WriteLine("============================================");
-				Console.WriteLine("You have ran out of Coins!");
-				Console.WriteLine("The game have ended! Thanks for playing!");
-				Console.WriteLine("============================================");
-				Console.WriteLine("Saving score...");
-				Console.WriteLine("Score Saved and updated the leaderboard!");
+				Console.WriteLine("========================================");
+				Console.WriteLine("The game has ended Thanks for playing!");
+                static void Main(string[] args)
+                {
+                    // Create an instance of the check_leaderboard_score class
+                    check_leaderboard_score leaderboard = new check_leaderboard_score();
 
-               check_leaderboard_score checkLeaderboardScore = new check_leaderboard_score();
-               List<Player> topTenPlayers = checkLeaderboardScore.GetTopTenPlayers();
+                    // Prompt the user to enter the player name
+                    Console.Write("Enter the player name: ");
+                    string playerName = Console.ReadLine();
 
-               foreach (Player player in topTenPlayers)
-               {
-                     Console.WriteLine($"Name: {player.Name}, Score: {player.Score}");
-               }
-              
+                    // Prompt the user to enter the player score
+                    Console.Write("Enter the player score: ");
+                    int playerScore = Convert.ToInt32(Console.ReadLine());
+
+                    // Add the new player to the leaderboard
+                    leaderboard.AddPlayer(playerName, playerScore);
+                }
+
+                Console.WriteLine("Saving score to leaderboard....");
+				Console.WriteLine("Game Saved!");
+				Console.WriteLine("========================================");
+				Console.WriteLine("Returning to Main Menu");
+                
+				
+
                 return false;
 			}
 			else if (Turn <= 400)
@@ -95,22 +106,31 @@ namespace NgeeAnnCity.Models
 			}
 			else
 			{
-				Console.WriteLine("========================================");
-				Console.WriteLine("The game has ended Thanks for playing!");
-				Console.WriteLine("Saving score to leaderboard....");
-				Console.WriteLine("Game Saved!");
-				Console.WriteLine("========================================");
-				Console.WriteLine("Returning to Main Menu");
-
-                check_leaderboard_score checkLeaderboardScore = new check_leaderboard_score();
-                List<Player> topTenPlayers = checkLeaderboardScore.GetTopTenPlayers();
-
-                foreach (Player player in topTenPlayers)
+                Console.WriteLine("========================================");
+                Console.WriteLine("The game has ended Thanks for playing!");
+                static void Main(string[] args)
                 {
-                    Console.WriteLine($"Name: {player.Name}, Score: {player.Score}");
-                }
+                    // Create an instance of the check_leaderboard_score class
+                    check_leaderboard_score leaderboard = new check_leaderboard_score();
 
-             
+                    // Prompt the user to enter the player name
+                    Console.Write("Enter the player name: ");
+                    string playerName = Console.ReadLine();
+
+                    // Prompt the user to enter the player score
+                    Console.Write("Enter the player score: ");
+                    int playerScore = Convert.ToInt32(Console.ReadLine());
+
+                    // Add the new player to the leaderboard
+                    leaderboard.AddPlayer(playerName, playerScore);
+                }
+                Console.WriteLine("Saving score to leaderboard....");
+                Console.WriteLine("Game Saved!");
+                Console.WriteLine("========================================");
+                Console.WriteLine("Returning to Main Menu");
+            
+
+
                 return false;
 			}
 
