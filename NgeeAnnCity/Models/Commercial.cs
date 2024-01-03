@@ -23,7 +23,7 @@ namespace NgeeAnnCity.Models
 			int addedPoints = 0;
 			if (y_coord + 1 < 20)
 			{
-				if (grid[x_coord, y_coord + 1] is Residential || grid[x_coord, y_coord + 1] is Commercial)
+				if (grid[x_coord, y_coord + 1] is Residential)
 				{
 					addedPoints++;
 				}
@@ -31,7 +31,7 @@ namespace NgeeAnnCity.Models
 
 			if (y_coord - 1 >= 0)
 			{
-				if (grid[x_coord, y_coord - 1] is Residential || grid[x_coord, y_coord - 1] is Commercial)
+				if (grid[x_coord, y_coord - 1] is Residential)
 				{
 					addedPoints++;
 				}
@@ -39,7 +39,7 @@ namespace NgeeAnnCity.Models
 
 			if (x_coord + 1 < 20)
 			{
-				if (grid[x_coord + 1, y_coord] is Residential || grid[x_coord + 1, y_coord] is Commercial)
+				if (grid[x_coord + 1, y_coord] is Residential)
 				{
 					addedPoints++;
 				}
@@ -47,7 +47,7 @@ namespace NgeeAnnCity.Models
 
 			if (x_coord - 1 >= 0)
 			{
-				if (grid[x_coord - 1, y_coord] is Residential || grid[x_coord - 1, y_coord] is Commercial)
+				if (grid[x_coord - 1, y_coord] is Residential)
 				{
 					addedPoints++;
 				}
@@ -56,6 +56,46 @@ namespace NgeeAnnCity.Models
 
 
 			return addedPoints;
+		}
+		public override int ProcessCoins(Building[,] grid, int x_coord, int y_coord)
+		{
+			int addedCoins = 0;
+
+
+
+			if (y_coord + 1 < 20)
+			{
+				if (grid[x_coord, y_coord + 1] is Residential)
+				{
+					addedCoins++;
+				}
+			}
+
+			if (y_coord - 1 >= 0)
+			{
+				if (grid[x_coord, y_coord - 1] is Residential)
+				{
+					addedCoins++;
+				}
+			}
+
+			if (x_coord + 1 < 20)
+			{
+				if (grid[x_coord + 1, y_coord] is Residential)
+				{
+					addedCoins++;
+				}
+			}
+
+			if (x_coord - 1 >= 0)
+			{
+				if (grid[x_coord - 1, y_coord] is Residential)
+				{
+					addedCoins++;
+				}
+			}
+			
+			return addedCoins;
 		}
 	}
 }

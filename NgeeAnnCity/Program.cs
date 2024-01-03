@@ -37,7 +37,7 @@ while (isRunning)
 				{
 					gameplay = false;
 				}
-				game.ProcessAllPoints();
+				game.ProcessPointsAndCoins();
 				game.nextTurn();
 			}
 			
@@ -56,7 +56,7 @@ while (isRunning)
 					{
 						loadedGameplay = false;
 					}
-					loadedGame.ProcessAllPoints();
+					loadedGame.ProcessPointsAndCoins();
 					loadedGame.nextTurn();
 				}
 			}

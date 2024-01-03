@@ -22,13 +22,19 @@ namespace NgeeAnnCity.Models
 			int addedPoints = 0;
 			//add 1 point for this idustry building
 			addedPoints = 1;
+			return addedPoints;
+		}
+		public override int ProcessCoins(Building[,] grid, int x_coord, int y_coord)
+		{
+			//implement the logic to add coins here
+			int addedCoins = 0;
 			//if adjacent to Residential, add 1 point
-			
+
 			if (y_coord + 1 < 20)
 			{
 				if (grid[x_coord, y_coord + 1] is Residential)
 				{
-					addedPoints++;
+					addedCoins++;
 				}
 			}
 
@@ -36,7 +42,7 @@ namespace NgeeAnnCity.Models
 			{
 				if (grid[x_coord, y_coord - 1] is Residential)
 				{
-					addedPoints++;
+					addedCoins++;
 				}
 			}
 
@@ -44,7 +50,7 @@ namespace NgeeAnnCity.Models
 			{
 				if (grid[x_coord + 1, y_coord] is Residential)
 				{
-					addedPoints++;
+					addedCoins++;
 				}
 			}
 
@@ -52,13 +58,11 @@ namespace NgeeAnnCity.Models
 			{
 				if (grid[x_coord - 1, y_coord] is Residential)
 				{
-					addedPoints++;
+					addedCoins++;
 				}
 			}
 
-
-
-			return addedPoints;
+			return addedCoins;
 		}
 	}
 }

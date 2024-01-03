@@ -118,12 +118,14 @@ namespace NgeeAnnCity.Models
 		}
 		//=======================================================================
 		// Turn
-		public void ProcessAllPoints()
+		public void ProcessPointsAndCoins()
 		{
 			//Non game Breaking bug, X and Y is flipped
 			Console.WriteLine("Points Calculation...");
 			int rows = Grid.GetLength(0);
 			int columns = Grid.GetLength(1);
+			int oPoints = Score;
+			int oCoins = Coins;
 			for (int y = 0; y < rows; y++)
 			{
 				for (int x = 0; x < columns; x++)
@@ -132,13 +134,21 @@ namespace NgeeAnnCity.Models
 					if (Grid[y, x] != null)
 					{
 						char xLetter = ConvertNumberToLetter(x + 1);
-						Console.Write("x: " + xLetter + " y: " + (y+1));
-						int addedPoints= Grid[y, x].ProcessPoints(Grid, y, x);
-						Console.WriteLine(" || Added Points: " + addedPoints);
-						Score += Grid[y, x].ProcessPoints(Grid, y, x);
+						
+						int addedPoints = Grid[y, x].ProcessPoints(Grid, y, x);
+						int addedCoins = Grid[y, x].ProcessCoins(Grid, y, x);
+
+						Score += addedPoints;
+						Coins += addedCoins;
+
+						Console.Write("x: " + xLetter + " y: " + (y + 1));
+						Console.Write(" || Added Points: " + addedPoints);
+						Console.WriteLine(" || Added Coins: " + addedCoins);
 					}
 				}
 			}
+			Console.WriteLine($"Coin Change|| {oCoins}->{Coins}");
+			Console.WriteLine($"Point Change|| {oPoints}->{Score}");
 		}
 		public void nextTurn()
 		{
