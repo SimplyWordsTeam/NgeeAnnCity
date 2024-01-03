@@ -18,6 +18,7 @@ namespace NgeeAnnCity.Models
 		}
 		public override int ProcessPoints(Building[,] grid, int x_coord, int y_coord)
 		{
+			
 			// Implement the logic for processing points in the Commercial subclass
 			// You need to provide the actual implementation based on your requirements
 			// For now, returning 0 as a placeholder
