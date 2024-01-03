@@ -4,55 +4,72 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static NgeeAnnCity.Models.Game;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace NgeeAnnCity.Models
 {
-	internal class check_leaderboard_score
-	{
-		private List<Player> players;
-		private const string filePath = "leaderboard.txt";
+    public class check_leaderboard_score
+    {
+        private List<Player> scores;
+        private const string filePath = "leaderboard.txt";
 
-		public check_leaderboard_score()
-		{
-			players = new List<Player>();
-		}
+        public check_leaderboard_score()
+        {
+            scores = new List<Player>();
+        }
 
-		public void AddPlayer(string name, int score)
-		{
-			players.Add(new Player(name, score));
-			SaveLeaderboard();
-		}
+        public void AddPlayer(string name, int score)
+        {
+            Player newPlayer = new Player(name, score);
+            scores.Add(newPlayer);
+            scores = scores.OrderByDescending(player => player.Score).ToList();
+            SaveLeaderboard();
+        }
 
-		public List<Player> GetTopTenPlayers()
-		{
-			return players.OrderByDescending(player => player.Score).Take(10).ToList();
-		}
+        public void LoadLeaderboard()
+        {
+            if (scores == null || !scores.Any())
+            {
+                if (File.Exists(filePath))
+                {
+                    using (StreamReader reader = new StreamReader(filePath))
+                    {
+                        string line;
+                        while ((line = reader.ReadLine()) != null)
+                        {
+                            string[] data = line.Split(',');
+                            scores.Add(new Player(data[0], int.Parse(data[1])));
+                        }
+                    }
+                }
+            }
+        }
 
-		public void LoadLeaderboard()
-		{
-			if (File.Exists(filePath))
-			{
-				using (StreamReader reader = new StreamReader(filePath))
-				{
-					string line;
-					while ((line = reader.ReadLine()) != null)
-					{
-						string[] data = line.Split(',');
-						players.Add(new Player(data[0], int.Parse(data[1])));
-					}
-				}
-			}
-		}
+        private void SaveLeaderboard()
+        {
+            using (StreamWriter writer = new StreamWriter(filePath, false))
+            {
+                foreach (Player player in scores)
+                {
+                    writer.WriteLine($"{player.Name},{player.Score}");
+                }
+            }
+        }
 
-		private void SaveLeaderboard()
-		{
-			using (StreamWriter writer = new StreamWriter(filePath, false))
-			{
-				foreach (Player player in players)
-				{
-					writer.WriteLine($"{player.Name},{player.Score}");
-				}
-			}
-		}
-	}
-}
+      
+
+            // Method to display the leaderboard
+            public void DisplayLeaderboard()
+            {
+                Console.WriteLine("\nLeaderboard:");
+                Console.WriteLine("Rank | Name\t| Score");
+                Console.WriteLine("-------------------------");
+
+                for (int i = 0; i < scores.Count; i++)
+                {
+                    Console.WriteLine($"{i + 1}\t| {scores[i].Name}\t| {scores[i].Score}");
+                }
+            }
+        }
+    }
+
