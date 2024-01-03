@@ -120,6 +120,7 @@ namespace NgeeAnnCity.Models
 		// Turn
 		public void ProcessAllPoints()
 		{
+			//Non game Breaking bug, X and Y is flipped
 			Console.WriteLine("Points Calculation...");
 			int rows = Grid.GetLength(0);
 			int columns = Grid.GetLength(1);
