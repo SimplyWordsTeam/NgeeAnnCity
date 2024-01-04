@@ -37,11 +37,15 @@ while (isRunning)
 			while (gameplay)
 			{
 				game.DisplayGrid();
-				if (game.Menu() == false)
+				if (game.Menu() == false)//If Menu returns false, it means the user want to return to the main menu
 				{
 					gameplay = false;
 				}
-				game.ProcessPointsAndCoins();
+				else // This is so that the process points and coins will only run if the user is still playing the game
+				{
+					game.ProcessPointsAndCoins();
+				}
+				
 				game.nextTurn();
 			}
 			
@@ -56,11 +60,14 @@ while (isRunning)
 				while (loadedGameplay)
 				{
 					loadedGame.DisplayGrid();
-					if (loadedGame.Menu() == false)
+					if (loadedGame.Menu() == false) //If Menu returns false, it means the user want to return to the main menu
 					{
 						loadedGameplay = false;
 					}
-					loadedGame.ProcessPointsAndCoins();
+					else // This is so that the process points and coins will only run if the user is still playing the game
+					{
+						loadedGame.ProcessPointsAndCoins();
+					}
 					loadedGame.nextTurn();
 				}
 			}

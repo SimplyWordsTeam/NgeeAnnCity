@@ -66,6 +66,7 @@ namespace NgeeAnnCity.Models
 				Console.WriteLine("Game Saved!");
 				Console.WriteLine("========================================");
 				Console.WriteLine("Returning to Main Menu");
+				Console.WriteLine(" ");
                 
 				
 
@@ -92,10 +93,14 @@ namespace NgeeAnnCity.Models
 							break;
 						case "2":
 							Console.WriteLine("Saving Game...");
+
+							Console.WriteLine(" ");
 							SaveGame();
 							break;
 						case "3":
 							Console.WriteLine("Returning to Main Menu...");
+
+							Console.WriteLine(" ");
 							return false;
 						default:
 							Console.WriteLine("Invalid input");
