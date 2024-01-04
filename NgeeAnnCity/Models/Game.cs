@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
+using System.Globalization;
 using System.Linq;
 using System.Numerics;
 using System.Security.Cryptography.X509Certificates;
@@ -55,7 +56,7 @@ namespace NgeeAnnCity.Models
 
 				Console.WriteLine("========================================");
 				Console.WriteLine("The game has ended Thanks for playing!");
-				check_leaderboard_score(game);
+				gameend(game);
 				Console.WriteLine("Saving score to leaderboard....");
 				Console.WriteLine("Game Saved!");
 				Console.WriteLine("========================================");
@@ -87,7 +88,6 @@ namespace NgeeAnnCity.Models
 							break;
 						case "2":
 							Console.WriteLine("Saving Game...");
-
 							Console.WriteLine(" ");
 							SaveGame();
 							break;
@@ -107,7 +107,7 @@ namespace NgeeAnnCity.Models
 			{
                 Console.WriteLine("========================================");
                 Console.WriteLine("The game has ended Thanks for playing!");
-				check_leaderboard_score(game);
+				gameend(game);
 				Console.WriteLine("Saving score to leaderboard....");
                 Console.WriteLine("Game Saved!");
                 Console.WriteLine("========================================");
@@ -157,7 +157,7 @@ namespace NgeeAnnCity.Models
 		public void nextTurn()
 		{
 			//increment turn by 1
-			Turn += 200;
+			Turn += 1;
 		}
 		//=======================================================================
 		//Building codes
@@ -583,13 +583,29 @@ namespace NgeeAnnCity.Models
             }
         }
 		//=======================================================================
-		// Check leaderboard score
-		public void check_leaderboard_score(Game game)
+		//game end
+
+		public void gameend(Game game)
 		{
-			Leaderboard newscore = new Leaderboard();
-			newscore.loadleaderboard();
-			newscore.leaderboard_replacementcheck(game);
+			Console.WriteLine("Please Enter your name");
+			string name = Console.ReadLine();
+			game.Name = name;
+			game.Date = DateTime.Now;
+			saveleaderboard(game);
 		}
+
+
 		//=======================================================================
+		//save leaderboard
+		public void saveleaderboard(Game game)
+		{
+			string filePath = "game_leaderboard.csv";
+			using (StreamWriter writer = new StreamWriter(filePath, true))
+			{
+				writer.WriteLine($"{game.Name},{game.Score},{game.Coins},{game.Turn},{game.Date}");
+
+			}
+		}
+		
 	}
 }

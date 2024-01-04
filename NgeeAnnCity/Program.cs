@@ -24,14 +24,13 @@ while (isRunning)
 	{
 		case "1":
 			Console.WriteLine("Displaying high scores");
-			Leaderboard get_leaderboard = new Leaderboard();
-			get_leaderboard.loadleaderboard();
-			get_leaderboard.leaderboardranking();
+			leaderboardList();
 
 
-            
 
-            break;
+
+
+			break;
 		case "2":
 			Console.WriteLine("Starting new game...");
 			bool gameplay = true;
@@ -84,3 +83,113 @@ while (isRunning)
 	}
 }
 
+//=======================================================================
+// Print leaderboard
+
+void leaderboardList()
+{
+	int i = 1;
+	List <Game> scorelist = LoadAndSortLeaderboard();
+	foreach (Game game in scorelist)
+	{
+		if (i < 11)
+		{
+			Console.WriteLine($"{i}. Name: {game.Name} Score: {game.Score}  Coins: {game.Coins}  Turn: {game.Turn}  Score: {game.Score}  Date: {game.Date}");
+			i += 1;
+		}
+		else break;
+		
+	}
+	
+}
+
+
+
+
+
+
+//=======================================================================
+//Load and sort this runs both function at once
+List<Game> LoadAndSortLeaderboard()
+{
+	List<Game> gamelist = LoadLeaderboard();
+
+	// Sort the list in descending order based on Score
+	gamelist = gamelist.OrderByDescending(game => game.Score).ToList();
+
+	return gamelist;
+}
+//=======================================================================
+//Load leaderboard
+List<Game> LoadLeaderboard()
+{
+	List<Game> gamelist = new List<Game>();
+	try
+	{
+		string filePath = "game_leaderboard.csv";
+
+		if (File.Exists(filePath))
+		{
+			using (StreamReader reader = new StreamReader(filePath))
+			{
+				// Read the header line
+				string header = reader.ReadLine();
+
+				int lineNumber = 1; // Track the line number for error reporting
+
+				while (!reader.EndOfStream)
+				{
+					string line = reader.ReadLine();
+
+					try
+					{
+						string[] gameData = line.Split(',');
+
+						string Name = gameData[0];
+
+						// Error-checking for parsing Coins, Turn, and Score
+						if (int.TryParse(gameData[2], out int Coins) &&
+							int.TryParse(gameData[3], out int Turn) &&
+							int.TryParse(gameData[1], out int Score))
+						{
+							DateTime date;
+							// Try multiple date format patterns
+							string[] dateFormats = { "M/d/yyyy H:mm:ss tt", "M/d/yyyy h:mm:ss tt", "M/d/yyyy H:mm tt", "M/d/yyyy h:mm tt", "M/d/yyyy H:mm", "M/d/yyyy h:mm" };
+
+							if (DateTime.TryParseExact(gameData[4], dateFormats, CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
+							{
+								gamelist.Add(new Game(Name, Coins, Turn, Score, date));
+							}
+							else
+							{
+								Console.WriteLine($"Error parsing date on line {lineNumber}: {line}");
+							}
+						}
+						else
+						{
+							Console.WriteLine($"Error parsing Coins, Turn, or Score on line {lineNumber}: {line}");
+						}
+					}
+					catch (Exception ex)
+					{
+						Console.WriteLine($"Error processing line {lineNumber}: {ex.Message}");
+						Console.WriteLine($"Problematic line content: {line}");
+					}
+
+					lineNumber++;
+				}
+			}
+		}
+		else
+		{
+			Console.WriteLine("No game data file found.");
+		}
+	}
+	catch (Exception ex)
+	{
+		Console.WriteLine($"Error loading game data: {ex.Message}");
+	}
+
+	return gamelist;
+}
+//=======================================================================
