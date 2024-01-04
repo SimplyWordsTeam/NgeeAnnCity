@@ -29,6 +29,6 @@ namespace NgeeAnnCity.Models
 			protected set { cost = value; }
 		}
 		public abstract int ProcessPoints(Building[,] grid, int x_coord, int y_coord); //operator for the logic to add points 
-
+		public abstract int ProcessCoins(Building[,] grid, int x_coord, int y_coord); //operator for the logic to add coins
 	}
 }

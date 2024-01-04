@@ -37,5 +37,13 @@ namespace NgeeAnnCity.Models
 			}
 			return addedPoints;
 		}
+
+		public override int ProcessCoins(Building[,] grid, int x_coord, int y_coord)
+		{
+			int addedCoins = 0;
+
+
+			return addedCoins;
+		}
 	}
 }

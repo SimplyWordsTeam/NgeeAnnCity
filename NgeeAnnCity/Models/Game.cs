@@ -48,7 +48,7 @@ namespace NgeeAnnCity.Models
                 static void Main(string[] args)
                 {
                     // Create an instance of the check_leaderboard_score class
-                    check_leaderboard_score leaderboard = new check_leaderboard_score();
+                    Leaderboard leaderboard = new Leaderboard();
 
                     // Prompt the user to enter the player name
                     Console.Write("Enter the player name: ");
@@ -66,6 +66,7 @@ namespace NgeeAnnCity.Models
 				Console.WriteLine("Game Saved!");
 				Console.WriteLine("========================================");
 				Console.WriteLine("Returning to Main Menu");
+				Console.WriteLine(" ");
                 
 				
 
@@ -87,15 +88,19 @@ namespace NgeeAnnCity.Models
 					{
 						case "1":
 							Console.WriteLine("Displaying Available Buildings");
-							buildingselection();
+							BuildingSelection();
 							turnend = true;
 							break;
 						case "2":
 							Console.WriteLine("Saving Game...");
+
+							Console.WriteLine(" ");
 							SaveGame();
 							break;
 						case "3":
 							Console.WriteLine("Returning to Main Menu...");
+
+							Console.WriteLine(" ");
 							return false;
 						default:
 							Console.WriteLine("Invalid input");
@@ -111,7 +116,7 @@ namespace NgeeAnnCity.Models
                 static void Main(string[] args)
                 {
                     // Create an instance of the check_leaderboard_score class
-                    check_leaderboard_score leaderboard = new check_leaderboard_score();
+                    Leaderboard leaderboard = new Leaderboard();
 
                     // Prompt the user to enter the player name
                     Console.Write("Enter the player name: ");
@@ -138,12 +143,14 @@ namespace NgeeAnnCity.Models
 		}
 		//=======================================================================
 		// Turn
-		public void ProcessAllPoints()
+		public void ProcessPointsAndCoins()
 		{
 			//Non game Breaking bug, X and Y is flipped
 			Console.WriteLine("Points Calculation...");
 			int rows = Grid.GetLength(0);
 			int columns = Grid.GetLength(1);
+			int oPoints = Score;
+			int oCoins = Coins;
 			for (int y = 0; y < rows; y++)
 			{
 				for (int x = 0; x < columns; x++)
@@ -152,13 +159,21 @@ namespace NgeeAnnCity.Models
 					if (Grid[y, x] != null)
 					{
 						char xLetter = ConvertNumberToLetter(x + 1);
-						Console.Write("x: " + xLetter + " y: " + (y+1));
-						int addedPoints= Grid[y, x].ProcessPoints(Grid, y, x);
-						Console.WriteLine(" || Added Points: " + addedPoints);
-						Score += Grid[y, x].ProcessPoints(Grid, y, x);
+						
+						int addedPoints = Grid[y, x].ProcessPoints(Grid, y, x);
+						int addedCoins = Grid[y, x].ProcessCoins(Grid, y, x);
+
+						Score += addedPoints;
+						Coins += addedCoins;
+
+						Console.Write("x: " + xLetter + " y: " + (y + 1));
+						Console.Write(" || Added Points: " + addedPoints);
+						Console.WriteLine(" || Added Coins: " + addedCoins);
 					}
 				}
 			}
+			Console.WriteLine($"Coin Change|| {oCoins}->{Coins}");
+			Console.WriteLine($"Point Change|| {oPoints}->{Score}");
 		}
 		public void nextTurn()
 		{
@@ -167,7 +182,7 @@ namespace NgeeAnnCity.Models
 		}
 		//=======================================================================
 		//Building codes
-		public void buildingselection()
+		public void BuildingSelection()
 		{
 			Random random = new Random();
 
@@ -201,13 +216,13 @@ namespace NgeeAnnCity.Models
 						case "1":
 							Console.WriteLine();
 							Console.WriteLine("You have chosen:" + first_buildingchosen.Name);
-							buildingprompt(first_buildingchosen);
+							BuildingPrompt(first_buildingchosen);
 							chosen = true;
 							break;
 						case "2":
 							Console.WriteLine();
 							Console.WriteLine("You have chosen:" + second_buildingchosen.Name);
-							buildingprompt(second_buildingchosen);
+							BuildingPrompt(second_buildingchosen);
 							chosen = true;
 
 							break;
@@ -229,7 +244,7 @@ namespace NgeeAnnCity.Models
 		}
 		//=======================================================================
 		//Ask for building location
-		public void buildingprompt(Building Building)
+		public void BuildingPrompt(Building Building)
 		{
 			while (true)
 			{
@@ -237,12 +252,12 @@ namespace NgeeAnnCity.Models
 				Console.WriteLine("Please enter the X coordinate");
 				int x_axis = x_coordinate();
 				Console.WriteLine(); //This is to make the menu smoother/look nicer
-				int y_axis = y_cooridnate();
+				int y_axis = y_coordinate();
 				y_axis -= 1;
 				x_axis -= 1; //Since the number starts from 0 instaed of 1, -1 is needed
-				if (check_building_connection(y_axis, x_axis) == true)
+				if (CheckBuildingConnection(y_axis, x_axis) == true)
 				{
-					buildBuilding(y_axis, x_axis, Building);
+					BuildBuilding(y_axis, x_axis, Building);
 					Coins -= 1;
 					break;
 				}
@@ -257,7 +272,7 @@ namespace NgeeAnnCity.Models
 		//=======================================================================
 		// y_coordinate
 
-		private int y_cooridnate()
+		private int y_coordinate()
 		{
 			Console.WriteLine("Please enter the Y coordinate");
 			while (true)
@@ -343,7 +358,7 @@ namespace NgeeAnnCity.Models
 		}
 		//=======================================================================
 		// Code to place the building to the chosen area
-		public void buildBuilding(int x, int y, Building building)
+		public void BuildBuilding(int x, int y, Building building)
 		{
 			Grid[x, y] = building;
 		}
@@ -414,7 +429,7 @@ namespace NgeeAnnCity.Models
 		}
 		//=======================================================================
 		//Function to check if there are adjacent buildings so that we can check if the player is able to build the building at the area
-		public bool check_building_connection(int x, int y) // This function is to check if the buildings are connect to be built
+		public bool CheckBuildingConnection(int x, int y) // This function is to check if the buildings are connect to be built
 		{
 			if (Grid[x, y] == null)
 			{
