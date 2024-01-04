@@ -48,7 +48,7 @@ namespace NgeeAnnCity.Models
                 static void Main(string[] args)
                 {
                     // Create an instance of the check_leaderboard_score class
-                    check_leaderboard_score leaderboard = new check_leaderboard_score();
+                    Leaderboard leaderboard = new Leaderboard();
 
                     // Prompt the user to enter the player name
                     Console.Write("Enter the player name: ");
@@ -88,7 +88,7 @@ namespace NgeeAnnCity.Models
 					{
 						case "1":
 							Console.WriteLine("Displaying Available Buildings");
-							buildingselection();
+							BuildingSelection();
 							turnend = true;
 							break;
 						case "2":
@@ -116,7 +116,7 @@ namespace NgeeAnnCity.Models
                 static void Main(string[] args)
                 {
                     // Create an instance of the check_leaderboard_score class
-                    check_leaderboard_score leaderboard = new check_leaderboard_score();
+                    Leaderboard leaderboard = new Leaderboard();
 
                     // Prompt the user to enter the player name
                     Console.Write("Enter the player name: ");
@@ -182,7 +182,7 @@ namespace NgeeAnnCity.Models
 		}
 		//=======================================================================
 		//Building codes
-		public void buildingselection()
+		public void BuildingSelection()
 		{
 			Random random = new Random();
 
@@ -216,13 +216,13 @@ namespace NgeeAnnCity.Models
 						case "1":
 							Console.WriteLine();
 							Console.WriteLine("You have chosen:" + first_buildingchosen.Name);
-							buildingprompt(first_buildingchosen);
+							BuildingPrompt(first_buildingchosen);
 							chosen = true;
 							break;
 						case "2":
 							Console.WriteLine();
 							Console.WriteLine("You have chosen:" + second_buildingchosen.Name);
-							buildingprompt(second_buildingchosen);
+							BuildingPrompt(second_buildingchosen);
 							chosen = true;
 
 							break;
@@ -244,7 +244,7 @@ namespace NgeeAnnCity.Models
 		}
 		//=======================================================================
 		//Ask for building location
-		public void buildingprompt(Building Building)
+		public void BuildingPrompt(Building Building)
 		{
 			while (true)
 			{
@@ -252,12 +252,12 @@ namespace NgeeAnnCity.Models
 				Console.WriteLine("Please enter the X coordinate");
 				int x_axis = x_coordinate();
 				Console.WriteLine(); //This is to make the menu smoother/look nicer
-				int y_axis = y_cooridnate();
+				int y_axis = y_coordinate();
 				y_axis -= 1;
 				x_axis -= 1; //Since the number starts from 0 instaed of 1, -1 is needed
-				if (check_building_connection(y_axis, x_axis) == true)
+				if (CheckBuildingConnection(y_axis, x_axis) == true)
 				{
-					buildBuilding(y_axis, x_axis, Building);
+					BuildBuilding(y_axis, x_axis, Building);
 					Coins -= 1;
 					break;
 				}
@@ -272,7 +272,7 @@ namespace NgeeAnnCity.Models
 		//=======================================================================
 		// y_coordinate
 
-		private int y_cooridnate()
+		private int y_coordinate()
 		{
 			Console.WriteLine("Please enter the Y coordinate");
 			while (true)
@@ -358,7 +358,7 @@ namespace NgeeAnnCity.Models
 		}
 		//=======================================================================
 		// Code to place the building to the chosen area
-		public void buildBuilding(int x, int y, Building building)
+		public void BuildBuilding(int x, int y, Building building)
 		{
 			Grid[x, y] = building;
 		}
@@ -429,7 +429,7 @@ namespace NgeeAnnCity.Models
 		}
 		//=======================================================================
 		//Function to check if there are adjacent buildings so that we can check if the player is able to build the building at the area
-		public bool check_building_connection(int x, int y) // This function is to check if the buildings are connect to be built
+		public bool CheckBuildingConnection(int x, int y) // This function is to check if the buildings are connect to be built
 		{
 			if (Grid[x, y] == null)
 			{

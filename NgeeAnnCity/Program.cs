@@ -24,7 +24,7 @@ while (isRunning)
 	{
 		case "1":
 			Console.WriteLine("Displaying high scores");
-            static void Main(string[] args, check_leaderboard_score check_leaderboard_score)
+            static void Main(string[] args, Leaderboard check_leaderboard_score)
             {
                 check_leaderboard_score.DisplayLeaderboard();
             }

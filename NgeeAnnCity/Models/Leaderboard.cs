@@ -8,12 +8,12 @@ using static System.Formats.Asn1.AsnWriter;
 
 namespace NgeeAnnCity.Models
 {
-    public class check_leaderboard_score
+    public class Leaderboard
     {
         private List<Player> scores;
         private const string filePath = "leaderboard.txt";
 
-        public check_leaderboard_score()
+        public Leaderboard()
         {
             scores = new List<Player>();
         }
