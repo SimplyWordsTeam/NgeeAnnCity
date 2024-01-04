@@ -26,6 +26,9 @@ while (isRunning)
 			Console.WriteLine("Displaying high scores");
             static void Main(string[] args, check_leaderboard_score check_leaderboard_score)
             {
+
+				check_leaderboard_score.LoadLeaderboard();
+
                 check_leaderboard_score.DisplayLeaderboard();
             }
 
