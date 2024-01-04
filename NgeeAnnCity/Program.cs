@@ -24,13 +24,12 @@ while (isRunning)
 	{
 		case "1":
 			Console.WriteLine("Displaying high scores");
-            static void Main(string[] args, Leaderboard check_leaderboard_score)
-            {
+			Leaderboard get_leaderboard = new Leaderboard();
+			get_leaderboard.loadleaderboard();
+			get_leaderboard.leaderboardranking();
 
-				check_leaderboard_score.LoadLeaderboard();
 
-                check_leaderboard_score.DisplayLeaderboard();
-            }
+            
 
             break;
 		case "2":
@@ -40,7 +39,7 @@ while (isRunning)
 			while (gameplay)
 			{
 				game.DisplayGrid();
-				if (game.Menu() == false)//If Menu returns false, it means the user want to return to the main menu
+				if (game.Menu(game) == false)//If Menu returns false, it means the user want to return to the main menu
 				{
 					gameplay = false;
 				}
@@ -63,7 +62,7 @@ while (isRunning)
 				while (loadedGameplay)
 				{
 					loadedGame.DisplayGrid();
-					if (loadedGame.Menu() == false) //If Menu returns false, it means the user want to return to the main menu
+					if (loadedGame.Menu(loadedGame) == false) //If Menu returns false, it means the user want to return to the main menu
 					{
 						loadedGameplay = false;
 					}

@@ -17,6 +17,8 @@ namespace NgeeAnnCity.Models
 		public int Turn { get; set; }
 		public int Score { get; set; }
 		public Building[,] Grid { get; set; }
+		public string? Name { get;set;}
+		public DateTime? Date { get; set; }
 
 		public Game()
 		{
@@ -28,6 +30,14 @@ namespace NgeeAnnCity.Models
 			Turn = 1;
 			Console.WriteLine(Grid[0, 0]?.Name.ToString() ?? "null" + "hi");
 		}
+		public Game(string name, int coins, int turn, int score, DateTime date)
+		{
+			Name = name;
+			Coins = coins;
+			Turn = turn;
+			Score = score;
+			Date = date;
+		}
 		public Game(int id, int coins, Building[,] grid, int turn, int score)
 		{
 			Id = id;
@@ -38,31 +48,15 @@ namespace NgeeAnnCity.Models
 		}
 		//=======================================================================
 		//Menu
-		public bool Menu()
+		public bool Menu(Game game)
 		{
 			if (Coins == 0)
 			{
 
 				Console.WriteLine("========================================");
 				Console.WriteLine("The game has ended Thanks for playing!");
-                static void Main(string[] args)
-                {
-                    // Create an instance of the check_leaderboard_score class
-                    Leaderboard leaderboard = new Leaderboard();
-
-                    // Prompt the user to enter the player name
-                    Console.Write("Enter the player name: ");
-                    string playerName = Console.ReadLine();
-
-                    // Prompt the user to enter the player score
-                    Console.Write("Enter the player score: ");
-                    int playerScore = Convert.ToInt32(Console.ReadLine());
-
-                    // Add the new player to the leaderboard
-                    leaderboard.AddPlayer(playerName, playerScore);
-                }
-
-                Console.WriteLine("Saving score to leaderboard....");
+				check_leaderboard_score(game);
+				Console.WriteLine("Saving score to leaderboard....");
 				Console.WriteLine("Game Saved!");
 				Console.WriteLine("========================================");
 				Console.WriteLine("Returning to Main Menu");
@@ -113,23 +107,8 @@ namespace NgeeAnnCity.Models
 			{
                 Console.WriteLine("========================================");
                 Console.WriteLine("The game has ended Thanks for playing!");
-                static void Main(string[] args)
-                {
-                    // Create an instance of the check_leaderboard_score class
-                    Leaderboard leaderboard = new Leaderboard();
-
-                    // Prompt the user to enter the player name
-                    Console.Write("Enter the player name: ");
-                    string playerName = Console.ReadLine();
-
-                    // Prompt the user to enter the player score
-                    Console.Write("Enter the player score: ");
-                    int playerScore = Convert.ToInt32(Console.ReadLine());
-
-                    // Add the new player to the leaderboard
-                    leaderboard.AddPlayer(playerName, playerScore);
-                }
-                Console.WriteLine("Saving score to leaderboard....");
+				check_leaderboard_score(game);
+				Console.WriteLine("Saving score to leaderboard....");
                 Console.WriteLine("Game Saved!");
                 Console.WriteLine("========================================");
                 Console.WriteLine("Returning to Main Menu");
@@ -178,7 +157,7 @@ namespace NgeeAnnCity.Models
 		public void nextTurn()
 		{
 			//increment turn by 1
-			Turn += 1;
+			Turn += 200;
 		}
 		//=======================================================================
 		//Building codes
@@ -603,6 +582,14 @@ namespace NgeeAnnCity.Models
                 return false;
             }
         }
+		//=======================================================================
+		// Check leaderboard score
+		public void check_leaderboard_score(Game game)
+		{
+			Leaderboard newscore = new Leaderboard();
+			newscore.loadleaderboard();
+			newscore.leaderboard_replacementcheck(game);
+		}
 		//=======================================================================
 	}
 }
