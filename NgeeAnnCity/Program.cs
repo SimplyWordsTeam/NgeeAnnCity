@@ -132,8 +132,6 @@ List<Game> LoadLeaderboard()
 		{
 			using (StreamReader reader = new StreamReader(filePath))
 			{
-				// Read the header line
-				string header = reader.ReadLine();
 
 				int lineNumber = 1; // Track the line number for error reporting
 
