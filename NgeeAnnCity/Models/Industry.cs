@@ -28,35 +28,40 @@ namespace NgeeAnnCity.Models
 		{
 			//implement the logic to add coins here
 			int addedCoins = 0;
+
+			bool yp1 = y_coord + 1 < 20;
+			bool ym1 = y_coord - 1 >= 0;
+			bool xp1 = x_coord + 1 < 20;
+			bool xm1 = x_coord - 1 >= 0;
 			//if adjacent to Residential, add 1 point
 
-			if (y_coord + 1 < 20)
+			if (xp1)
 			{
-				if (grid[x_coord, y_coord + 1] is Residential)
+				if (grid[y_coord, x_coord + 1] is Residential)
 				{
 					addedCoins++;
 				}
 			}
 
-			if (y_coord - 1 >= 0)
+			if (xm1)
 			{
-				if (grid[x_coord, y_coord - 1] is Residential)
+				if (grid[y_coord, x_coord - 1] is Residential)
 				{
 					addedCoins++;
 				}
 			}
 
-			if (x_coord + 1 < 20)
+			if (yp1)
 			{
-				if (grid[x_coord + 1, y_coord] is Residential)
+				if (grid[y_coord + 1, x_coord] is Residential)
 				{
 					addedCoins++;
 				}
 			}
 
-			if (x_coord - 1 >= 0)
+			if (ym1)
 			{
-				if (grid[x_coord - 1, y_coord] is Residential)
+				if (grid[y_coord - 1, x_coord] is Residential)
 				{
 					addedCoins++;
 				}

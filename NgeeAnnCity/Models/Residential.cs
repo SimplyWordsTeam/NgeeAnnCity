@@ -29,30 +29,30 @@ namespace NgeeAnnCity.Models
 			bool xp1 = x_coord + 1 < 20;
 			bool xm1 = x_coord - 1 >= 0;
 
-			if (yp1)
-			{
-				if (grid[x_coord, y_coord + 1] is Industry)
-				{
-					isBesideIndustry = true;
-				}
-			}
-			if (ym1)
-			{
-				if (grid[x_coord, y_coord - 1] is Industry)
-				{
-					isBesideIndustry = true;
-				}
-			}
 			if (xp1)
 			{
-				if (grid[x_coord + 1, y_coord] is Industry)
+				if (grid[y_coord, x_coord + 1] is Industry)
 				{
 					isBesideIndustry = true;
 				}
 			}
 			if (xm1)
 			{
-				if (grid[x_coord - 1, y_coord] is Industry)
+				if (grid[y_coord, x_coord - 1] is Industry)
+				{
+					isBesideIndustry = true;
+				}
+			}
+			if (yp1)
+			{
+				if (grid[y_coord + 1, x_coord] is Industry)
+				{
+					isBesideIndustry = true;
+				}
+			}
+			if (ym1)
+			{
+				if (grid[y_coord - 1, x_coord] is Industry)
 				{
 					isBesideIndustry = true;
 				}
@@ -64,62 +64,62 @@ namespace NgeeAnnCity.Models
 			else
 			{
 				//if adjacent to Residential or commercial, add 1 point
-				if(y_coord + 1<20)
+				if(xp1)
 				{
-					if (grid[x_coord, y_coord + 1] is Residential || grid[x_coord, y_coord + 1] is Commercial)
+					if (grid[y_coord, x_coord + 1] is Residential || grid[y_coord, x_coord + 1] is Commercial)
 					{
 						addedPoints++;
 					}
 				}
-				if (y_coord - 1 >= 0)
+				if (xm1)
 				{
-					if (grid[x_coord, y_coord - 1] is Residential || grid[x_coord, y_coord - 1] is Commercial)
+					if (grid[y_coord, x_coord - 1] is Residential || grid[y_coord, x_coord - 1] is Commercial)
 					{
 						addedPoints++;
 					}
 				}
-				if (x_coord + 1 < 20)
+				if (yp1)
 				{
-					if (grid[x_coord + 1, y_coord] is Residential || grid[x_coord + 1, y_coord] is Commercial)
+					if (grid[y_coord + 1, x_coord] is Residential || grid[y_coord + 1, x_coord] is Commercial)
 					{
 						addedPoints++;
 					}
 				}
-				if (x_coord - 1 >= 0)
+				if (ym1)
 				{
-					if (grid[x_coord - 1, y_coord] is Residential || grid[x_coord - 1, y_coord] is Commercial)
+					if (grid[y_coord - 1, x_coord] is Residential || grid[y_coord - 1, x_coord] is Commercial)
 					{
 						addedPoints++;
 					}
 				}
 
 				//if adjacent to Park, add 2 point
-				if (y_coord + 1 < 20)
-				{
-					if (grid[x_coord, y_coord + 1] is Park)
-					{
-						addedPoints += 2;
-					}
-				}
-
-				if (y_coord - 1 >= 0)
-				{
-					if (grid[x_coord, y_coord - 1] is Park)
-					{
-						addedPoints += 2;
-					}
-				}
 				if (xp1)
 				{
-					if (grid[x_coord + 1, y_coord] is Park)
+					if (grid[y_coord, x_coord + 1] is Park)
 					{
 						addedPoints += 2;
 					}
 				}
 
 				if (xm1)
+				{
+					if (grid[y_coord, x_coord - 1] is Park)
+					{
+						addedPoints += 2;
+					}
+				}
+				if (yp1)
+				{
+					if (grid[y_coord + 1, x_coord] is Park)
+					{
+						addedPoints += 2;
+					}
+				}
+
+				if (ym1)
 				{ 
-					if (grid[x_coord - 1, y_coord] is Park)
+					if (grid[y_coord - 1, x_coord] is Park)
 					{
 						addedPoints+=2;
 					}
@@ -131,6 +131,40 @@ namespace NgeeAnnCity.Models
 		public override int ProcessCoins(Building[,] grid, int x_coord, int y_coord)
 		{
 			int addedCoins = 0;
+			bool yp1 = y_coord + 1 < 20;
+			bool ym1 = y_coord - 1 >= 0;
+			bool xp1 = x_coord + 1 < 20;
+			bool xm1 = x_coord - 1 >= 0;
+
+			//if adjacent to Industry, add 1 coin
+			if (xp1)
+			{
+				if (grid[y_coord, x_coord + 1] is Industry|| grid[y_coord, x_coord + 1] is Commercial)
+				{
+					addedCoins++;
+				}
+			}
+			if (xm1)
+			{
+				if (grid[y_coord, x_coord - 1] is Industry || grid[y_coord, x_coord - 1] is Commercial)
+				{
+					addedCoins++;
+				}
+			}
+			if (yp1)
+			{
+				if (grid[y_coord + 1, x_coord] is Industry || grid[y_coord+1, x_coord ] is Commercial)
+				{
+					addedCoins++;
+				}
+			}
+			if (ym1)
+			{
+				if (grid[y_coord - 1, x_coord] is Industry || grid[y_coord-1, x_coord] is Commercial)
+				{
+					addedCoins++;
+				}
+			}
 
 
 			return addedCoins;

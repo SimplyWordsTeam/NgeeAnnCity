@@ -44,7 +44,7 @@ while (isRunning)
 				}
 				else // This is so that the process points and coins will only run if the user is still playing the game
 				{
-					game.ProcessPointsAndCoins();
+					game.ProcessPoints();
 				}
 				
 				game.nextTurn();
@@ -67,7 +67,8 @@ while (isRunning)
 					}
 					else // This is so that the process points and coins will only run if the user is still playing the game
 					{
-						loadedGame.ProcessPointsAndCoins();
+						
+						loadedGame.ProcessPoints();
 					}
 					loadedGame.nextTurn();
 				}

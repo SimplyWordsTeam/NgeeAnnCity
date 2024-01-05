@@ -4,6 +4,7 @@ using System.Diagnostics.Metrics;
 using System.Globalization;
 using System.Linq;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -122,38 +123,66 @@ namespace NgeeAnnCity.Models
 		}
 		//=======================================================================
 		// Turn
-		public void ProcessPointsAndCoins()
+		//public void ProcessPointsAndCoins()
+		//{
+		//	//Non game Breaking bug, X and Y is flipped
+		//	Console.WriteLine("Points Calculation...");
+		//	int rows = Grid.GetLength(0);
+		//	int columns = Grid.GetLength(1);
+		//	int oPoints = Score;
+		//	int oCoins = Coins;
+		//	for (int y = 0; y < rows; y++)
+		//	{
+		//		for (int x = 0; x < columns; x++)
+		//		{
+					
+		//			if (Grid[y, x] != null)
+		//			{
+		//				char xLetter = ConvertNumberToLetter(x + 1);
+						
+		//				int addedPoints = Grid[y, x].ProcessPoints(Grid, y, x);
+		//				int addedCoins = Grid[y, x].ProcessCoins(Grid, y, x);
+
+		//				Score += addedPoints;
+		//				Coins += addedCoins;
+
+		//				Console.Write("x: " + xLetter + " y: " + (y + 1));
+		//				Console.Write(" || Added Points: " + addedPoints);
+		//				Console.WriteLine(" || Added Coins: " + addedCoins);
+		//			}
+		//		}
+		//	}
+		//	Console.WriteLine($"Coin Change|| {oCoins}->{Coins}");
+		//	Console.WriteLine($"Point Change|| {oPoints}->{Score}");
+		//}
+		public void ProcessPoints()
 		{
-			//Non game Breaking bug, X and Y is flipped
 			Console.WriteLine("Points Calculation...");
 			int rows = Grid.GetLength(0);
 			int columns = Grid.GetLength(1);
 			int oPoints = Score;
-			int oCoins = Coins;
+			int newPoints = 0;
 			for (int y = 0; y < rows; y++)
 			{
 				for (int x = 0; x < columns; x++)
 				{
-					
+
 					if (Grid[y, x] != null)
 					{
 						char xLetter = ConvertNumberToLetter(x + 1);
-						
-						int addedPoints = Grid[y, x].ProcessPoints(Grid, y, x);
-						int addedCoins = Grid[y, x].ProcessCoins(Grid, y, x);
 
-						Score += addedPoints;
-						Coins += addedCoins;
+						int addedPoints = Grid[y, x].ProcessPoints(Grid, x, y);
+
+						newPoints += addedPoints;
 
 						Console.Write("x: " + xLetter + " y: " + (y + 1));
-						Console.Write(" || Added Points: " + addedPoints);
-						Console.WriteLine(" || Added Coins: " + addedCoins);
-					}
+						Console.Write(" || Added Points: " + addedPoints+"\n");					}
 				}
 			}
-			Console.WriteLine($"Coin Change|| {oCoins}->{Coins}");
+			Score = newPoints;
 			Console.WriteLine($"Point Change|| {oPoints}->{Score}");
 		}
+		
 		public void nextTurn()
 		{
 			//increment turn by 1
@@ -236,7 +265,8 @@ namespace NgeeAnnCity.Models
 				x_axis -= 1; //Since the number starts from 0 instaed of 1, -1 is needed
 				if (CheckBuildingConnection(y_axis, x_axis) == true)
 				{
-					BuildBuilding(y_axis, x_axis, Building);
+					BuildBuilding(x_axis, y_axis, Building);
+					ProcessCoins(x_axis, y_axis);
 					Coins -= 1;
 					break;
 				}
@@ -339,7 +369,14 @@ namespace NgeeAnnCity.Models
 		// Code to place the building to the chosen area
 		public void BuildBuilding(int x, int y, Building building)
 		{
-			Grid[x, y] = building;
+			Grid[y, x] = building;
+		}
+		public void ProcessCoins(int x,int y)
+		{
+			int coinsAdded = Grid[y, x].ProcessCoins(Grid, x, y);
+			Console.WriteLine("Process Coins.. " +coinsAdded);
+			Coins += coinsAdded;
+
 		}
 		//=======================================================================
 		//Used for the random number generator to pick a building to be chosen to be built
